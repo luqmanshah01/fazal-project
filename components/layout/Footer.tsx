@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Icon } from "@iconify/react";
 import { Container } from "@/components/ui/Container";
-import { FOOTER_LINKS } from "@/lib/constants";
+import { FOOTER_LINKS } from "@/lib/data";
 
 const SOCIALS = [
   { icon: "mdi:linkedin", href: "#", label: "LinkedIn" },
@@ -18,7 +18,7 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>
             <Image
-              src="/images/logo-footer.svg"
+              src="/images/logos/logo-footer.svg"
               alt="SV Tech"
               width={181}
               height={106}

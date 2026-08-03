@@ -1,8 +1,4 @@
-export type NavItem = {
-  label: string;
-  href: string;
-  hasDropdown?: boolean;
-};
+import type { NavItem, Service, Testimonial, BlogPost } from "@/lib/types";
 
 export const NAV_ITEMS: NavItem[] = [
   { label: "Home", href: "#" },
@@ -20,12 +16,12 @@ export const TRUST_BADGES = [
 ];
 
 export const PARTNERS = [
-  { src: "/images/partner-1.png", alt: "Partner logo 1" },
-  { src: "/images/partner-2.png", alt: "Partner logo 2" },
-  { src: "/images/partner-3.png", alt: "Partner logo 3" },
-  { src: "/images/partner-4.png", alt: "Partner logo 4" },
-  { src: "/images/partner-5.png", alt: "Interloop" },
-  { src: "/images/partner-6.png", alt: "Partner logo 6" },
+  { src: "/images/partners/partner-1.png", alt: "Partner logo 1" },
+  { src: "/images/partners/partner-2.png", alt: "Partner logo 2" },
+  { src: "/images/partners/partner-3.png", alt: "Partner logo 3" },
+  { src: "/images/partners/partner-4.png", alt: "Partner logo 4" },
+  { src: "/images/partners/partner-5.png", alt: "Interloop" },
+  { src: "/images/partners/partner-6.png", alt: "Partner logo 6" },
 ];
 
 export const STATS = [
@@ -34,13 +30,6 @@ export const STATS = [
   { value: "50+", label: "Enterprise Clients" },
   { value: "99.9%", label: "Uptime SLA" },
 ];
-
-export type Service = {
-  title: string;
-  description: string;
-  cta: string;
-  icon: string;
-};
 
 export const SERVICES: Service[] = [
   {
@@ -121,12 +110,6 @@ export const INDUSTRIES = [
   "Retail &\nE-Commerce",
 ];
 
-export type Testimonial = {
-  quote: string;
-  role: string;
-  company: string;
-};
-
 export const TESTIMONIALS: Testimonial[] = [
   {
     quote:
@@ -176,30 +159,23 @@ export const FAQS = [
   },
 ];
 
-export type BlogPost = {
-  category: string;
-  title: string;
-  cover: string;
-  href: string;
-};
-
 export const BLOG_POSTS: BlogPost[] = [
   {
     category: "Ransomware",
     title: "How to Protect Your Business from Ransomware in Pakistan",
-    cover: "/images/blog-cover.png",
+    cover: "/images/blog/blog-cover.png",
     href: "#",
   },
   {
     category: "VAPT",
     title: "VAPT vs. Vulnerability Scan: What Pakistani Enterprises Should Know",
-    cover: "/images/blog-cover.png",
+    cover: "/images/blog/blog-cover.png",
     href: "#",
   },
   {
     category: "Compliance",
     title: "From Cost Center to Competitive Edge: The Strategic Value of Managed IT",
-    cover: "/images/blog-cover.png",
+    cover: "/images/blog/blog-cover.png",
     href: "#",
   },
 ];

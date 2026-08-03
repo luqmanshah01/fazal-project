@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { GradientText } from "@/components/ui/GradientText";
 import { Reveal } from "@/components/ui/Reveal";
-import { PARTNERS } from "@/lib/constants";
+import { PARTNERS } from "@/lib/data";
 
 export function Partners() {
   const loop = [...PARTNERS, ...PARTNERS];

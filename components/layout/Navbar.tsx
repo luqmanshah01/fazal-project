@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { Icon } from "@iconify/react";
-import { NAV_ITEMS } from "@/lib/constants";
+import { NAV_ITEMS } from "@/lib/data";
 import { cn } from "@/lib/utils";
 
 export function Navbar() {
@@ -15,7 +15,7 @@ export function Navbar() {
       <div className="mx-auto flex w-full max-w-[1400px] items-center justify-between gap-6 px-6 lg:px-12">
         <Link href="/" className="flex items-center gap-2" aria-label="SV Tech home">
           <Image
-            src="/images/logo.svg"
+            src="/images/logos/logo.svg"
             alt="SV Tech"
             width={78}
             height={46}

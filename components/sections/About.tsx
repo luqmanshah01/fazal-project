@@ -2,7 +2,7 @@ import { Container } from "@/components/ui/Container";
 import { GradientText } from "@/components/ui/GradientText";
 import { Stat } from "@/components/ui/Stat";
 import { Reveal } from "@/components/ui/Reveal";
-import { STATS } from "@/lib/constants";
+import { STATS } from "@/lib/data";
 
 export function About() {
   return (

@@ -5,7 +5,7 @@ import { Icon } from "@iconify/react";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
-import { TESTIMONIALS } from "@/lib/constants";
+import { TESTIMONIALS } from "@/lib/data";
 
 export function Testimonials() {
   const [active, setActive] = useState(0);

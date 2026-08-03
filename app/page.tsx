@@ -1,4 +1,5 @@
-import { Navbar } from "@/components/sections/Navbar";
+import { Navbar } from "@/components/layout/Navbar";
+import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/sections/Hero";
 import { Partners } from "@/components/sections/Partners";
 import { About } from "@/components/sections/About";
@@ -10,7 +11,6 @@ import { Testimonials } from "@/components/sections/Testimonials";
 import { ContactForm } from "@/components/sections/ContactForm";
 import { FAQ } from "@/components/sections/FAQ";
 import { Blog } from "@/components/sections/Blog";
-import { Footer } from "@/components/sections/Footer";
 
 export default function Home() {
   return (

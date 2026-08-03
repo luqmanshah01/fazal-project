@@ -7,7 +7,7 @@ import { Container } from "@/components/ui/Container";
 import { GradientText } from "@/components/ui/GradientText";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
-import { FAQS } from "@/lib/constants";
+import { FAQS } from "@/lib/data";
 
 export function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);

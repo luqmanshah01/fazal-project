@@ -6,7 +6,7 @@ export function CTABanner() {
   return (
     <section className="relative isolate w-full overflow-hidden bg-black text-white">
       <Image
-        src="/images/cta-bg-4d9e81.png"
+        src="/images/backgrounds/cta-bg.png"
         alt=""
         fill
         sizes="100vw"

@@ -2,14 +2,14 @@ import { Button } from "@/components/ui/Button";
 import { GradientText } from "@/components/ui/GradientText";
 import { TrustBadge } from "@/components/ui/TrustBadge";
 import { Reveal } from "@/components/ui/Reveal";
-import { TRUST_BADGES } from "@/lib/constants";
+import { TRUST_BADGES } from "@/lib/data";
 
 export function Hero() {
   return (
     <section className="relative isolate flex min-h-screen w-full items-center overflow-hidden text-white md:min-h-[800px] lg:min-h-[1040px]">
       <video
         src="/videos/hero-bg.mp4"
-        poster="/images/hero-bg-552d65.png"
+        poster="/images/backgrounds/hero-bg.png"
         autoPlay
         loop
         muted

@@ -4,7 +4,7 @@ import { Icon } from "@iconify/react";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
-import { BLOG_POSTS } from "@/lib/constants";
+import { BLOG_POSTS } from "@/lib/data";
 
 export function Blog() {
   return (
