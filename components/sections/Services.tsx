@@ -6,8 +6,7 @@ import { SERVICES } from "@/lib/data";
 
 export function Services() {
   return (
-    <section id="services" className="relative w-full bg-white py-16
-     md:py-20">
+    <section id="services" className="relative w-full bg-white pt-2 pb-16 md:pt-4 md:pb-20">
       <Container>
         <SectionHeading
           eyebrow="What We Do"

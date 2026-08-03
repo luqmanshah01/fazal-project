@@ -56,15 +56,17 @@ export function Stat({ value, label, className }: StatProps) {
       <span
         className="font-sans font-extrabold align-middle"
         style={{
-          fontSize: "55.88px",
+          fontSize: "50.88px",
           lineHeight: "62.86px",
           letterSpacing: "-1.31px",
+          paddingTop: "2px",
+          paddingRight: "60px",
         }}
       >
         <span className="text-gradient-stat-dark">{shown}</span>
         <span className="text-brand-red">{suffix}</span>
       </span>
-      <span className="whitespace-pre-line text-center text-[19px] font-normal leading-tight text-black">
+      <span className="whitespace-pre-line text-center text-[18px] font-normal leading-tight text-black">
         {label}
       </span>
     </div>
