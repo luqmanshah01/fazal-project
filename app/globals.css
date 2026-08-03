@@ -1,0 +1,150 @@
+@import "tailwindcss";
+
+@theme {
+  /* Fonts */
+  --font-sans: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-playfair), ui-serif, Georgia, serif;
+  --font-inter: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  /* Brand colors */
+  --color-brand-red: #ff5050;
+  --color-brand-red-light: #ff8080;
+  --color-brand-red-soft: rgba(255, 80, 80, 0.1);
+  --color-brand-red-glow: rgba(255, 80, 80, 0.15);
+  --color-brand-red-overlay: rgba(255, 80, 80, 0.3);
+
+  --color-ink-black: #000000;
+  --color-ink-white: #ffffff;
+  --color-ink-50: #fbfbfb;
+  --color-ink-100: #f6f6f6;
+  --color-ink-150: #f5f5f5;
+  --color-ink-400: #b2b2b2;
+  --color-ink-500: #696969;
+  --color-ink-muted-30: rgba(0, 0, 0, 0.3);
+  --color-ink-muted-50: rgba(0, 0, 0, 0.5);
+  --color-ink-muted-70: rgba(0, 0, 0, 0.7);
+
+  /* Radii */
+  --radius-btn-sm: 6.79px;
+  --radius-btn-md: 13.9px;
+  --radius-btn-lg: 14.98px;
+  --radius-card: 20px;
+  --radius-pill: 45.8px;
+
+  /* Shadows */
+  --shadow-btn-inset: inset 3.92px 4.71px 4.86px rgba(255, 255, 255, 0.25);
+  --shadow-btn-inset-sm: inset 1.92px 2.30px 2.38px rgba(255, 255, 255, 0.25);
+  --shadow-card: 8px 9px 38.2px rgba(0, 0, 0, 0.1);
+  --shadow-form: 10px 10px 50.4px rgba(255, 80, 80, 0.15);
+}
+
+:root {
+  color-scheme: light;
+}
+
+html,
+body {
+  background: #ffffff;
+  color: #000000;
+}
+
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Gradient text utilities used by hero + section headings */
+.text-gradient-hero {
+  background: linear-gradient(90deg, #ff5050 0%, #ffffff 38%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.text-gradient-hero-end {
+  background: linear-gradient(90deg, #ffffff 60%, #ff5050 92%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.text-gradient-red-black {
+  background: linear-gradient(90deg, #ff5050 15%, #000000 40%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.text-gradient-black-red {
+  background: linear-gradient(90deg, #000000 28%, #ff5050 65%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.text-gradient-stat {
+  background: linear-gradient(125deg, #000000 0%, #ff5050 95%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.text-gradient-stat-dark {
+  background: linear-gradient(180deg, #3a0d0d 0%, #a02020 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.text-gradient-quote {
+  background: linear-gradient(270deg, #696969 0%, #ffffff 88%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.text-gradient-quote-reverse {
+  background: linear-gradient(270deg, #ffffff 12%, #696969 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Marquee for partner logos */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+}
+
+/* Ambient pulse for CTA red ellipse glow */
+@keyframes ambient-pulse {
+  0%,
+  100% {
+    opacity: 0.7;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+}
+.animate-ambient-pulse {
+  animation: ambient-pulse 4s ease-in-out infinite;
+}
+
+/* Hide scrollbars on carousels while remaining scrollable */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Focus ring token */
+:where(button, a, input, textarea, select):focus-visible {
+  outline: 2px solid var(--color-brand-red);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
