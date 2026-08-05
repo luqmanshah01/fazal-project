@@ -29,9 +29,9 @@ export function SectionHeading({
     >
       {eyebrow ? (
         <span
-          style={{ width: "357.55px", height: "27.61px" }}
+          style={{ maxWidth: "357.55px", minHeight: "27.61px" }}
           className={cn(
-            "inline-flex items-center justify-center rounded-full border text-[13px] font-normal tracking-tight",
+            "inline-flex w-full items-center justify-center rounded-full border px-4 py-1 text-[13px] font-normal tracking-tight",
             isDark
               ? "border-white/30 bg-white/5 text-white"
               : "border-brand-red/40 bg-brand-red/5 text-black",
