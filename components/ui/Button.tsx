@@ -2,7 +2,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 
-type ButtonSize = "sm" | "md" | "lg" | "cta";
+type ButtonSize = "sm" | "md" | "lg" | "cta" | "hero" | "chip";
 type ButtonVariant =
   | "primary"
   | "primaryCta"
@@ -18,6 +18,11 @@ const SIZE_STYLES: Record<ButtonSize, string> = {
   lg: "h-[59px] px-11 text-lg font-medium rounded-[14.98px]",
   // About page CTA band — Figma 239:1689/1690
   cta: "h-[40px] px-[30.29px] text-[18.23px] font-semibold rounded-[10.1px]",
+  // Service page hero — Figma 239:1707/1708
+  hero: "h-[48px] px-[36.34px] text-[21.88px] font-semibold rounded-[12.11px]",
+  // Service card chip — Figma 239:1825. 27px clears WCAG 2.2 AA target size
+  // (24x24) but not the 44px AAA guideline.
+  chip: "h-[27px] px-[20.38px] text-[12.27px] font-semibold rounded-[6.79px]",
 };
 
 const VARIANT_STYLES: Record<ButtonVariant, string> = {

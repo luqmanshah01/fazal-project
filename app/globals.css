@@ -31,6 +31,12 @@
   --color-cert-icon: #ffb3b3; /* certification icon circle */
   --color-hero-glow: #7a1717; /* About hero ambient ellipse */
   --color-brand-red-deep: #cc2929; /* navbar Contact Us border */
+
+  /* Service page — measured from Figma node 239:1693 */
+  --color-surface-soft: #f9f9f9; /* threat + process section background */
+  --color-grid-line: #949494; /* services grid dividers */
+  --color-step-ring-outer: #ffeded; /* process step circle, outer ring */
+  --color-mesh-line: #04102a; /* services background mesh hairlines */
   --color-ink-muted-30: rgba(0, 0, 0, 0.3);
   --color-ink-muted-50: rgba(0, 0, 0, 0.5);
   --color-ink-muted-70: rgba(0, 0, 0, 0.7);
@@ -206,6 +212,60 @@ body {
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+/* Service page gradients — Figma node 239:1693. Per-class rules set
+   background-image, never the `background` shorthand: the shorthand includes
+   background-clip and would reset the shared `clip: text` back to border-box,
+   which renders every gradient word as a solid block. */
+.text-gradient-svc-hero-start,
+.text-gradient-svc-hero-end,
+.text-gradient-red-black-41,
+.text-gradient-black-red-22,
+.text-gradient-red-black-27b,
+.text-gradient-black-red-56,
+.text-gradient-red-black-22,
+.text-gradient-black-red-55,
+.text-gradient-red-black-46,
+.text-gradient-black-red-74 {
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+/* Hero — "Cybersecurity" / "Enterprise" */
+.text-gradient-svc-hero-start {
+  background-image: linear-gradient(90deg, #ff5050 0%, #ffffff 42%);
+}
+.text-gradient-svc-hero-end {
+  background-image: linear-gradient(90deg, #ffffff 71%, #ff5050 100%);
+}
+/* Threat Landscape — "Pakistan's" / "Prepared?" */
+.text-gradient-red-black-41 {
+  background-image: linear-gradient(90deg, #ff5050 13%, #000000 41%);
+}
+.text-gradient-black-red-22 {
+  background-image: linear-gradient(90deg, #000000 22%, #ff5050 40%);
+}
+/* Services Grid — "Our" / "Environment" */
+.text-gradient-red-black-27b {
+  background-image: linear-gradient(90deg, #ff5050 12%, #000000 27%);
+}
+.text-gradient-black-red-56 {
+  background-image: linear-gradient(90deg, #000000 56%, #ff5050 80%);
+}
+/* Process — "Our" / "Process" */
+.text-gradient-red-black-22 {
+  background-image: linear-gradient(90deg, #ff5050 4%, #000000 22%);
+}
+.text-gradient-black-red-55 {
+  background-image: linear-gradient(90deg, #000000 55%, #ff5050 84%);
+}
+/* FAQ — "Frequently" / "Pakistan" */
+.text-gradient-red-black-46 {
+  background-image: linear-gradient(90deg, #ff5050 20%, #000000 46%);
+}
+.text-gradient-black-red-74 {
+  background-image: linear-gradient(90deg, #000000 74%, #ff5050 85%);
 }
 
 /* Honour the OS "reduce motion" setting for the looping CSS animations.

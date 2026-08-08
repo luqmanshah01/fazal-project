@@ -55,3 +55,36 @@ export type ValueStatement = {
   label: string;
   body: string;
 };
+
+/* Service page — content measured from Figma node 239:1693 */
+
+export type ThreatStat = {
+  /** e.g. "200%+" or "$3.05M" */
+  value: string;
+  label: string;
+};
+
+export type SecurityService = {
+  /** May contain a newline; the design breaks these titles by hand */
+  title: string;
+  description: string;
+  cta: string;
+};
+
+export type ProcessStep = {
+  /** Zero-padded, as drawn: "01".."04" */
+  number: string;
+  /** May contain a newline */
+  title: string;
+  body: string;
+};
+
+export type ServiceFaq = {
+  question: string;
+  /**
+   * Empty when the answer is not yet written. Figma contains the questions
+   * only — every accordion is drawn closed with no answer behind it. Rows with
+   * an empty answer render as static, non-interactive rows.
+   */
+  answer: string;
+};

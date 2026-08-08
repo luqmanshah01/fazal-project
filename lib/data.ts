@@ -7,13 +7,17 @@ import type {
   Certification,
   Principle,
   ValueStatement,
+  ThreatStat,
+  SecurityService,
+  ProcessStep,
+  ServiceFaq,
 } from "@/lib/types";
 
 // Hash targets are prefixed with "/" so they resolve from any route, not just home.
 export const NAV_ITEMS: NavItem[] = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/about" },
-  { label: "Services", href: "/#services", hasDropdown: true },
+  { label: "Services", href: "/services/cybersecurity", hasDropdown: true },
   { label: "Resources", href: "/#resources", hasDropdown: true },
   { label: "Blogs", href: "/#blog" },
 ];
@@ -391,3 +395,132 @@ export const VENDOR_ROWS = [
     logo("r3-10.png", "Tiffany & Co."),
   ],
 ];
+
+/* ------------------------------------------------------------------ */
+/* Cybersecurity service page — copy verbatim from Figma node 239:1693 */
+/* Several strings have missing or doubled punctuation in the design   */
+/* ("catastrophic  yet", "a matter of if it is a matter of when",      */
+/* "modular you can engage us"). Left as-is pending confirmation.      */
+/* ------------------------------------------------------------------ */
+
+export const SERVICE_HERO = {
+  eyebrow: "Enterprise-Grade Protection for Pakistan's Businesses",
+  headingStart: "Cybersecurity",
+  headingMiddle: "Services in Pakistan 360° Protection for Your",
+  headingEnd: "Enterprise",
+  lede: "In today's threat landscape, a cyberattack is not a matter of if it is a matter of when. SV Tech delivers a full spectrum of enterprise cybersecurity services in Pakistan, from proactive threat hunting and 24/7 SOC monitoring to penetration testing, endpoint protection, and regulatory compliance all backed by certified experts and global vendor partnerships.",
+  primaryCta: "Get a Free Cybersecurity Assessment",
+  secondaryCta: "See All Services",
+} as const;
+
+export const THREAT_INTRO = [
+  "Pakistani businesses face a rapidly growing cyber threat landscape. Financial institutions, energy companies, and telecom operators in Pakistan have all been targeted by sophisticated threat actors many of whom exploit unpatched systems, weak access controls, and unmonitored network traffic.",
+  "For most Pakistani businesses, a single breach can be catastrophic  yet the majority still operate without a formal cybersecurity strategy.",
+];
+
+export const THREAT_STATS: ThreatStat[] = [
+  {
+    value: "200%+",
+    label:
+      "Increase in ransomware attacks across South Asia between 2022 and 2024.",
+  },
+  {
+    value: "$3.05M",
+    label:
+      "Average cost of a data breach for a mid-sized enterprise in Asia Pacific, per incident.",
+  },
+];
+
+export const SECURITY_SERVICES: SecurityService[] = [
+  {
+    title: "Vulnerability Assessment\n& Penetration Testing",
+    description:
+      "Our CREST-methodology VAPT service systematically identifies vulnerabilities across your network, web applications, and cloud infrastructure then delivers a prioritized remediation roadmap.",
+    cta: "Request a VAPT Quote",
+  },
+  {
+    title: "SOC as a Service 24/7 Security Monitoring",
+    description:
+      "Round-the-clock threat detection, analysis, and incident response without the cost of building an in-house SOC. Powered by SIEM platforms and global threat intelligence.",
+    cta: "Explore SOC Services",
+  },
+  {
+    title: "Endpoint Security\n& Protection",
+    description:
+      "Next-generation EDR from CrowdStrike and SentinelOne, combined with Zero Trust access policies, to eliminate lateral movement across every device on your network.",
+    cta: "Secure Your Endpoints",
+  },
+  {
+    title: "Firewall & Network\nSecurity",
+    description:
+      "Perimeter firewall deployment and management, IDS/IPS, network segmentation, VPN architecture, and SD-WAN security across Palo Alto, Fortinet, Cisco, and SonicWall.",
+    cta: "Secure Your Network",
+  },
+  {
+    title: "Email Security\n& Anti-Phishing",
+    description:
+      "Over 90% of cyberattacks begin with a phishing email. Multi-layer protection combining gateway filtering, sandboxing, DMARC/DKIM/SPF, and user awareness training.",
+    cta: "Stop Phishing Attacks",
+  },
+  {
+    title: "Compliance &\nRisk Management",
+    description:
+      "Achieve and maintain compliance with ISO 27001, PCI-DSS, NIST CSF, and local SBP/SECP cybersecurity regulations through formal risk assessments and audit preparation.",
+    cta: "Start Compliance Journey",
+  },
+];
+
+export const PROCESS_STEPS: ProcessStep[] = [
+  {
+    number: "01",
+    title: "Discovery & Risk\nAssessment",
+    body: "We start with a no-obligation security assessment of your current environment mapping your attack surface, identifying gaps, and scoring your risk posture against industry benchmarks.",
+  },
+  {
+    number: "02",
+    title: "Custom Security\nStrategy",
+    body: "Our team designs a cybersecurity roadmap tailored to your industry, size, and threat profile prioritizing high-impact, quick-win improvements alongside long-term strategic initiatives.",
+  },
+  {
+    number: "03",
+    title: "Deployment &\nIntegration",
+    body: "We implement security solutions with minimal disruption to your operations. All deployments are tested, documented, and handed over with full staff training.",
+  },
+  {
+    number: "04",
+    title: "Ongoing Monitoring\n& Support",
+    body: "Cybersecurity is not a one-time project. We provide continuous monitoring, quarterly reviews, threat intelligence updates, and 24/7 incident response support.",
+  },
+];
+
+/**
+ * ⚠️ Figma contains the four questions and nothing else — every accordion is
+ * drawn closed and there is no answer copy anywhere in the frame. Answers are
+ * left empty rather than invented; rows with an empty answer render as static
+ * rows. Fill these in and they become interactive automatically.
+ */
+export const SERVICE_FAQS: ServiceFaq[] = [
+  {
+    question: "What is the difference between VAPT and a cybersecurity audit?",
+    answer: "",
+  },
+  {
+    question: "How long does a cybersecurity engagement with SV Tech take?",
+    answer: "",
+  },
+  { question: "Can SV Tech work with our existing security tools?", answer: "" },
+  {
+    question:
+      "Do you provide cybersecurity services to SMEs or only large enterprises?",
+    answer: "",
+  },
+];
+
+export const SERVICE_CTA = {
+  heading:
+    "Your Business Deserves Enterprise-Grade Cybersecurity. Let's Build It Together.",
+  lede: "Talk to a certified cybersecurity consultant no jargon, no sales pressure. Just an honest assessment of your risk and a clear path forward.",
+  primaryCta: "Book Your Free Security Assessment",
+  secondaryCta: "Call: +92 51 517 2233",
+  phoneHref: "tel:+925115172233",
+} as const;
