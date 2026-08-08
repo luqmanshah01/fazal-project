@@ -24,7 +24,10 @@
   /* About page — measured from Figma node 239:1464 */
   --color-cert-surface: #f2f0f0; /* featured certification cell base */
   --color-cert-line: #d2d2d2; /* certification grid hairline */
-  --color-cert-label: #7b7b7b; /* certification card sub-label */
+  /* Figma has #7b7b7b here, but that is 3.88:1 on the #f5f5f5 card and fails
+     WCAG AA for body text. Darkened to #6b6b6b (4.89:1). Revert this one line
+     if the design must win over the contrast requirement. */
+  --color-cert-label: #6b6b6b; /* certification card sub-label */
   --color-cert-icon: #ffb3b3; /* certification icon circle */
   --color-hero-glow: #7a1717; /* About hero ambient ellipse */
   --color-brand-red-deep: #cc2929; /* navbar Contact Us border */
@@ -203,6 +206,15 @@ body {
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+/* Honour the OS "reduce motion" setting for the looping CSS animations.
+   framer-motion transitions are handled inside ui/Reveal. */
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-ambient-pulse {
+    animation: none;
+  }
 }
 
 /* Focus ring token */

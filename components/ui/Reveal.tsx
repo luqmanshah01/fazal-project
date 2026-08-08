@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
+import { motion, useReducedMotion, type Variants } from "framer-motion";
 import type { ReactNode } from "react";
 
 type RevealProps = {
@@ -11,12 +11,20 @@ type RevealProps = {
 };
 
 export function Reveal({ children, delay = 0, y = 20, className }: RevealProps) {
+  // Readers who ask for reduced motion still get the fade, but nothing travels.
+  const reduceMotion = useReducedMotion();
+  const offset = reduceMotion ? 0 : y;
+
   const variants: Variants = {
-    hidden: { opacity: 0, y },
+    hidden: { opacity: 0, y: offset },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] },
+      transition: {
+        duration: reduceMotion ? 0.01 : 0.5,
+        delay: reduceMotion ? 0 : delay,
+        ease: [0.22, 1, 0.36, 1],
+      },
     },
   };
 
