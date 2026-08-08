@@ -318,43 +318,76 @@ export const ABOUT_CTA = {
 } as const;
 
 /**
- * ⚠️ PLACEHOLDER — Figma repeats the Mission/Vision heading on the Timeline
- * section (see SKILL.md 9.2), which is a copy-paste error in the design since
- * the content is a company history. Change these three strings once the
- * designer confirms the intended wording.
+ * Verbatim from Figma node 239:1572, at the user's instruction to follow the
+ * design exactly.
+ *
+ * ⚠️ This is byte-identical to the Mission & Vision heading above, so the page
+ * now shows "Our Mission, Vision & Values" twice — once over the mission cards
+ * and again over the company timeline. Figma renders it at 59.02px here versus
+ * 72.21px there, which is the only difference. Almost certainly a copy-paste
+ * slip in the design; change these three strings to fix it.
  */
 export const TIMELINE_HEADING = {
   start: "Our",
-  middle: "Journey",
-  end: "So Far",
+  middle: "Mission, Vision &",
+  end: "Values",
 } as const;
 
 /**
- * Vendor / partner logos — Figma node 239:1621, three marquee rows.
+ * Client / partner logos — Figma node 239:1621, three marquee rows.
  *
- * ⚠️ Figma names these layers "image 172", "image 180", "Picture1e" etc., so the
- * actual vendor behind each logo is unknown. Alt text is generic and MUST be
- * replaced with real vendor names before launch (accessibility + SEO).
- * Row 2 slot 1 reuses the same image as row 1 slot 9 — that is how the design
- * has it, not a mistake here.
+ * Names were read off the logo artwork itself, because Figma names these
+ * layers "image 172", "Picture1e", "Asset 3@3x 2" and so on.
+ *
+ * ⚠️ CONTENT MISMATCH IN THE DESIGN: the section heading reads "Authorized
+ * Partner of the World's Leading Cybersecurity Vendors" and the lede talks
+ * about vendor certifications — but not one of these 28 logos is a security
+ * vendor. There is no CrowdStrike, Palo Alto Networks, Fortinet or
+ * SentinelOne. They are all customer organisations (healthcare, government,
+ * education, FMCG, automotive, finance). Either the heading or the logo set
+ * is wrong in Figma. Flagged, not silently corrected.
+ *
+ * Row 2 slot 1 repeats row 1 slot 9 (LOLC); that is how the design has it.
  */
-const vendorRow = (row: number, files: string[]) =>
-  files.map((file, i) => ({
-    src: `/images/about/vendors/${file}`,
-    alt: `Technology partner logo ${row}-${i + 1}`,
-  }));
+const logo = (file: string, name: string) => ({
+  src: `/images/about/vendors/${file}`,
+  alt: `${name} logo`,
+});
 
 export const VENDOR_ROWS = [
-  vendorRow(1, [
-    "r1-01.png", "r1-02.png", "r1-03.png", "r1-04.png", "r1-05.png",
-    "r1-06.png", "r1-07.png", "r1-08.png", "r1-09.png",
-  ]),
-  vendorRow(2, [
-    "r1-09.png", "r2-02.png", "r2-03.png", "r2-04.png", "r2-05.png",
-    "r2-06.png", "r2-07.svg", "r2-08.png", "r2-09.png", "r2-10.png",
-  ]),
-  vendorRow(3, [
-    "r3-01.png", "r3-02.png", "r3-03.png", "r3-04.png", "r3-05.png",
-    "r3-06.png", "r3-07.png", "r3-08.png", "r3-09.png", "r3-10.png",
-  ]),
+  [
+    logo("r1-01.png", "Dubai Judicial Institute"),
+    logo("r1-02.png", "Sharjah Golf & Shooting Club"),
+    logo("r1-03.png", "Marine Systems"),
+    logo("r1-04.png", "Liaquat National Hospital and Medical College"),
+    logo("r1-05.png", "Prime Healthcare Group"),
+    logo("r1-06.png", "Zakat House Kuwait"),
+    logo("r1-07.png", "Al Ain University"),
+    logo("r1-08.png", "Galadari Motor Driving Centre"),
+    logo("r1-09.png", "LOLC"),
+  ],
+  [
+    logo("r1-09.png", "LOLC"),
+    logo("r2-02.png", "Infomineo"),
+    logo("r2-03.png", "Al Khayyat Investments"),
+    logo("r2-04.png", "Samra"),
+    logo("r2-05.png", "Adamjee Insurance"),
+    logo("r2-06.png", "Dubai Air Wing"),
+    logo("r2-07.svg", "Khaadi"),
+    logo("r2-08.png", "Philip Morris International"),
+    logo("r2-09.png", "Mastercard"),
+    logo("r2-10.png", "Nayatel"),
+  ],
+  [
+    logo("r3-01.png", "GSME"),
+    logo("r3-02.png", "Ghitha"),
+    logo("r3-03.png", "NRTC Fresh"),
+    logo("r3-04.png", "Nike"),
+    logo("r3-05.png", "Levi's"),
+    logo("r3-06.png", "Mazda"),
+    logo("r3-07.png", "Dow"),
+    logo("r3-08.png", "Kraft Heinz"),
+    logo("r3-09.png", "Rockwell Automation"),
+    logo("r3-10.png", "Tiffany & Co."),
+  ],
 ];
