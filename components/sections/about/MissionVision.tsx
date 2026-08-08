@@ -21,15 +21,22 @@ export function MissionVision() {
         <Reveal>
           {/* Figma line-height is 61.65px against a 72.21px font — a tight 0.854 */}
           <h2 className="text-center font-sans text-[clamp(2rem,4.18vw,72.21px)] font-extrabold leading-[0.854] tracking-[-0.0178em] text-black">
-            <GradientText gradient="redBlack16">Our</GradientText> Mission,
-            Vision &amp;{" "}
+            <GradientText gradient="redBlack16">Our</GradientText>{" "}
+            Mission, Vision &amp;{" "}
             <GradientText gradient="blackRed69">Values</GradientText>
           </h2>
         </Reveal>
 
         <div className="mt-12 grid grid-cols-1 gap-8 lg:mt-16 lg:grid-cols-[1.346fr_1fr] lg:gap-[36.82px]">
-          <Reveal delay={0.1}>
-            <div className="relative aspect-[792.94/494.95] w-full overflow-hidden rounded-[25.69px]">
+          {/*
+            In Figma the photo is 494.95px tall and the two cards are
+            232.06 + 30.83 gap + 232.06 = 494.95, so all three edges line up
+            exactly. Below lg the photo keeps its own aspect ratio; from lg it
+            drops to h-full and lets the card column set the row height, which
+            keeps the alignment at any width instead of only at 1727px.
+          */}
+          <Reveal delay={0.1} className="lg:h-full">
+            <div className="relative aspect-[792.94/494.95] w-full overflow-hidden rounded-[25.69px] lg:aspect-auto lg:h-full">
               <Image
                 src="/images/about/mission.png"
                 alt="SV Tech security operations team at work"
@@ -56,7 +63,11 @@ export function MissionVision() {
 
           <div className="flex flex-col gap-6 lg:gap-[30.83px]">
             {MISSION_VISION.map((item, i) => (
-              <Reveal key={item.label} delay={0.15 + i * 0.05}>
+              <Reveal
+                key={item.label}
+                delay={0.15 + i * 0.05}
+                className="lg:flex-1"
+              >
                 <div className="flex h-full flex-col justify-center gap-[21.28px] rounded-[25.69px] bg-ink-150 p-8 shadow-card-mission lg:px-[33.4px]">
                   <h3 className="font-sans text-[clamp(1.5rem,2.1vw,36.29px)] font-extrabold leading-tight text-black">
                     {item.label}

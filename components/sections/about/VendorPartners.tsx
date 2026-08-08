@@ -21,8 +21,8 @@ export function VendorPartners() {
       <Container>
         <Reveal>
           <h2 className="text-center font-sans text-[clamp(1.875rem,3.71vw,64px)] font-extrabold leading-[1.16] tracking-[-0.0159em] text-black">
-            <GradientText gradient="redBlack29">Authorized</GradientText> Partner
-            of the World&apos;s
+            <GradientText gradient="redBlack29">Authorized</GradientText>{" "}
+            Partner of the World&apos;s
             <br className="hidden md:block" /> Leading Cybersecurity{" "}
             <GradientText gradient="blackRed57">Vendors</GradientText>
           </h2>
