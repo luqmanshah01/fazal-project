@@ -2,13 +2,21 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Icon } from "@iconify/react";
 import { NAV_ITEMS } from "@/lib/data";
 import { cn } from "@/lib/utils";
 
+// A link is active only when it points at a route, never at a hash target.
+function isActiveHref(href: string, pathname: string): boolean {
+  if (href.includes("#")) return false;
+  return href === "/" ? pathname === "/" : pathname.startsWith(href);
+}
+
 export function Navbar() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
 
   return (
     <header className="absolute inset-x-0 top-0 z-50 pt-6 md:pt-10 lg:pt-[60px]">
@@ -25,21 +33,32 @@ export function Navbar() {
           </Link>
 
           <nav className="hidden items-center gap-6 lg:flex xl:gap-7">
-            {NAV_ITEMS.map((item) => (
-              <Link
-                key={item.label}
-                href={item.href}
-                className="group inline-flex items-center gap-1.5 text-[15px] font-normal tracking-tight text-white/90 transition-colors hover:text-white"
-              >
-                {item.label}
-                {item.hasDropdown ? (
-                  <Icon
-                    icon="ep:arrow-down-bold"
-                    className="h-3 w-3 transition-transform group-hover:translate-y-0.5"
-                  />
-                ) : null}
-              </Link>
-            ))}
+            {NAV_ITEMS.map((item) => {
+              const active = isActiveHref(item.href, pathname);
+              return (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  aria-current={active ? "page" : undefined}
+                  className={cn(
+                    // px-2 matches the 8px padding in Figma; min-h-[44px] is an
+                    // accessibility deviation from the design's 41.6px hit area.
+                    "group inline-flex min-h-[44px] items-center gap-1.5 rounded-[10px] px-2 text-[15px] tracking-tight transition-colors",
+                    active
+                      ? "font-bold text-brand-red"
+                      : "font-normal text-white/90 hover:text-white",
+                  )}
+                >
+                  {item.label}
+                  {item.hasDropdown ? (
+                    <Icon
+                      icon="ep:arrow-down-bold"
+                      className="h-3 w-3 transition-transform group-hover:translate-y-0.5"
+                    />
+                  ) : null}
+                </Link>
+              );
+            })}
           </nav>
 
           <div className="flex items-center gap-3">
@@ -68,16 +87,25 @@ export function Navbar() {
           )}
         >
           <nav className="flex flex-col gap-1 px-4">
-            {NAV_ITEMS.map((item) => (
-              <Link
-                key={item.label}
-                href={item.href}
-                onClick={() => setOpen(false)}
-                className="rounded-lg px-3 py-3 text-base text-white/90 transition-colors hover:bg-white/5"
-              >
-                {item.label}
-              </Link>
-            ))}
+            {NAV_ITEMS.map((item) => {
+              const active = isActiveHref(item.href, pathname);
+              return (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  onClick={() => setOpen(false)}
+                  aria-current={active ? "page" : undefined}
+                  className={cn(
+                    "rounded-lg px-3 py-3 text-base transition-colors",
+                    active
+                      ? "font-bold text-brand-red"
+                      : "text-white/90 hover:bg-white/5",
+                  )}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
             <Link
               href="#contact"
               onClick={() => setOpen(false)}

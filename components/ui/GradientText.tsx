@@ -8,7 +8,18 @@ type Gradient =
   | "blackRed"
   | "stat"
   | "quote"
-  | "quoteReverse";
+  | "quoteReverse"
+  // About page — each section has its own stops, they are not interchangeable
+  | "aboutHeroStart"
+  | "aboutHeroEnd"
+  | "redBlack16"
+  | "blackRed69"
+  | "redBlack27"
+  | "blackRed45"
+  | "redBlack29"
+  | "blackRed57"
+  | "redBlack33"
+  | "blackRed83";
 
 const GRADIENTS: Record<Gradient, string> = {
   hero: "text-gradient-hero",
@@ -18,6 +29,16 @@ const GRADIENTS: Record<Gradient, string> = {
   stat: "text-gradient-stat",
   quote: "text-gradient-quote",
   quoteReverse: "text-gradient-quote-reverse",
+  aboutHeroStart: "text-gradient-about-hero-start",
+  aboutHeroEnd: "text-gradient-about-hero-end",
+  redBlack16: "text-gradient-red-black-16",
+  blackRed69: "text-gradient-black-red-69",
+  redBlack27: "text-gradient-red-black-27",
+  blackRed45: "text-gradient-black-red-45",
+  redBlack29: "text-gradient-red-black-29",
+  blackRed57: "text-gradient-black-red-57",
+  redBlack33: "text-gradient-red-black-33",
+  blackRed83: "text-gradient-black-red-83",
 };
 
 type GradientTextProps = {
