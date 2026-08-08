@@ -39,17 +39,17 @@ export function ProcessSteps() {
                   />
                 ) : null}
 
-                {/* Concentric rings — 156 / 108 / 68 in Figma */}
-                <span
-                  aria-hidden="true"
-                  className="flex h-[156px] w-[156px] shrink-0 items-center justify-center rounded-full bg-step-ring-outer"
-                >
+                {/*
+                  Concentric rings — 156 / 108 / 68 in Figma. The number lives
+                  inside the innermost circle rather than being positioned over
+                  it, so it stays centred as the type clamps down.
+                */}
+                <span className="flex h-[156px] w-[156px] shrink-0 items-center justify-center rounded-full bg-step-ring-outer">
                   <span className="flex h-[108px] w-[108px] items-center justify-center rounded-full bg-brand-red-light">
-                    <span className="flex h-[68px] w-[68px] items-center justify-center rounded-full bg-brand-red" />
+                    <span className="flex h-[68px] w-[68px] items-center justify-center rounded-full bg-brand-red font-sans text-[clamp(1.75rem,2.42vw,41.82px)] font-extrabold leading-none tracking-[-0.0002em] text-white">
+                      {step.number}
+                    </span>
                   </span>
-                </span>
-                <span className="pointer-events-none absolute top-[56px] font-sans text-[clamp(1.75rem,2.42vw,41.82px)] font-extrabold tracking-[-0.0002em] text-white">
-                  {step.number}
                 </span>
 
                 <h3 className="mt-6 whitespace-pre-line font-sans text-[clamp(1.125rem,1.19vw,20.63px)] font-extrabold leading-tight tracking-[-0.0007em] text-black">

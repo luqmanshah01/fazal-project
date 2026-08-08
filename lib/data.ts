@@ -29,13 +29,14 @@ export const TRUST_BADGES = [
   "Pakistan's Only Partner",
 ];
 
+// Names read off the logo artwork — the files are numbered, not labelled.
 export const PARTNERS = [
-  { src: "/images/partners/partner-1.png", alt: "Partner logo 1" },
-  { src: "/images/partners/partner-2.png", alt: "Partner logo 2" },
-  { src: "/images/partners/partner-3.png", alt: "Partner logo 3" },
-  { src: "/images/partners/partner-4.png", alt: "Partner logo 4" },
-  { src: "/images/partners/partner-5.png", alt: "Interloop" },
-  { src: "/images/partners/partner-6.png", alt: "Partner logo 6" },
+  { src: "/images/partners/partner-1.png", alt: "Adamjee Insurance logo" },
+  { src: "/images/partners/partner-2.png", alt: "Nayatel logo" },
+  { src: "/images/partners/partner-3.png", alt: "LOLC logo" },
+  { src: "/images/partners/partner-4.png", alt: "Unity Foods Limited logo" },
+  { src: "/images/partners/partner-5.png", alt: "Interloop logo" },
+  { src: "/images/partners/partner-6.png", alt: "PARCO logo" },
 ];
 
 export const STATS = [
@@ -201,10 +202,11 @@ export const FOOTER_LINKS = {
     { label: "Pricing", href: "#" },
     { label: "Case Studies", href: "#" },
   ],
+  // Route-prefixed so they resolve from /about and /services too, not just home.
   company: [
-    { label: "About", href: "#about" },
-    { label: "Blog", href: "#blog" },
-    { label: "Contact", href: "#contact" },
+    { label: "About", href: "/about" },
+    { label: "Blog", href: "/#blog" },
+    { label: "Contact", href: "/#contact" },
     { label: "Careers", href: "#" },
   ],
   legal: [
