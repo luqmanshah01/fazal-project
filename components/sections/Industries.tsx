@@ -6,27 +6,39 @@ import { INDUSTRIES } from "@/lib/data";
 
 export function Industries() {
   return (
-    <section className="relative w-full bg-white py-16 md:py-2">
+    <section className="relative w-full bg-white py-16 md:py-20">
       <Container>
         <SectionHeading
           eyebrow="Industries We Serve"
+          titleMaxWidthClass="max-w-[1203px]"
+          descriptionMaxWidthClass="max-w-[1425px]"
           title={
             <>
-              <GradientText gradient="redBlack">Cybersecurity</GradientText>{" "}
+              <GradientText gradient="homeIndustriesStart">Cybersecurity</GradientText>{" "}
               <span>Solutions for Every Industry in </span>
-              <GradientText gradient="blackRed">Pakistan</GradientText>
+              <GradientText gradient="homeIndustriesEnd">Pakistan</GradientText>
             </>
           }
           description="We bring 8+ years of international cybersecurity experience directly to Pakistan. Our team has delivered solutions across the US, Europe, and the Middle East and now brings that same expertise home."
         />
 
-        <div className="mt-16 grid grid-cols-1 divide-y divide-black/8 border border-black/8 sm:grid-cols-2 sm:divide-y-0 md:mt-20 md:grid-cols-3 lg:grid-cols-4">
-          {INDUSTRIES.map((label, i) => (
-            <Reveal key={label} delay={i * 0.04}>
-              <div className="group flex h-full items-center gap-5 border-black/8 bg-white p-6 transition-colors hover:bg-ink-50 sm:border-r sm:[&:nth-child(2n)]:border-r-0 md:[&:nth-child(2n)]:border-r md:[&:nth-child(3n)]:border-r-0 md:[&:nth-child(n+4)]:border-t lg:[&:nth-child(3n)]:border-r lg:[&:nth-child(4n)]:border-r-0 lg:[&:nth-child(n+4)]:border-t-0 lg:[&:nth-child(n+5)]:border-t">
-                <span className="h-14 w-14 flex-shrink-0 rounded-full bg-brand-red-light transition-transform duration-300 group-hover:scale-110" />
-                <h3 className="whitespace-pre-line font-sans text-base font-extrabold leading-tight tracking-[-0.02em] text-black md:text-[17px] lg:text-[19px]">
-                  {label}
+        {/*
+          Figma 97:662-690 — eight 346 x 132 cells on #FBFBFB, separated by
+          0.5px #B2B2B2 hairlines (right and bottom edges only, so the outer
+          frame stays open). Label is Regular 24.33px, not bold.
+        */}
+        <div className="mt-16 grid grid-cols-1 border-t border-l border-ink-400/50 md:mt-20 sm:grid-cols-2 lg:grid-cols-4">
+          {INDUSTRIES.map((industry, i) => (
+            <Reveal key={industry.label} delay={i * 0.04}>
+              <div className="group flex h-full min-h-[132px] items-center gap-5 border-b border-r border-ink-400/50 bg-ink-50 px-6 py-5 transition-colors hover:bg-white">
+                <span
+                  aria-hidden="true"
+                  className="flex h-[62.55px] w-[62.55px] flex-shrink-0 items-center justify-center rounded-full bg-step-ring-outer text-[27px] leading-none transition-transform duration-300 group-hover:scale-110"
+                >
+                  {industry.icon}
+                </span>
+                <h3 className="whitespace-pre-line font-sans text-base font-normal leading-tight tracking-[-0.0721em] text-black md:text-[19px] lg:text-[clamp(1.125rem,1.41vw,24.33px)]">
+                  {industry.label}
                 </h3>
               </div>
             </Reveal>

@@ -9,7 +9,18 @@ import { NAV_ITEMS } from "@/lib/data";
 import { cn } from "@/lib/utils";
 
 // A link is active only when it points at a route, never at a hash target.
-function isActiveHref(href: string, pathname: string): boolean {
+// `activePrefix` exists because "Services" links at one specific service page
+// but must light up across every /services/* route — Figma draws it active on
+// both the Cybersecurity and IT Infrastructure frames.
+function isActiveHref(
+  href: string,
+  pathname: string,
+  activePrefix?: string | string[],
+): boolean {
+  if (activePrefix) {
+    const prefixes = Array.isArray(activePrefix) ? activePrefix : [activePrefix];
+    return prefixes.some((prefix) => pathname.startsWith(prefix));
+  }
   if (href.includes("#")) return false;
   return href === "/" ? pathname === "/" : pathname.startsWith(href);
 }
@@ -21,7 +32,13 @@ export function Navbar() {
   return (
     <header className="absolute inset-x-0 top-0 z-50 pt-6 md:pt-10 lg:pt-[60px]">
       <div className="w-full px-6 lg:px-12 xl:px-[clamp(3rem,13.38vw,231px)]">
-        <div className="mx-auto flex max-w-[1267px] items-center justify-between gap-6 rounded-full border border-brand-red/50 bg-black/50 px-5 py-3 backdrop-blur-md lg:h-[85px] lg:py-0 lg:pl-[72px] lg:pr-16">
+        {/*
+          Figma measures the pill at 1727px: 72px left / 64px right padding.
+          That leaves too little room for the nav at 1024px, which pushed
+          "About Us" onto a second line — so the Figma padding is applied from
+          xl up, with tighter padding at lg.
+        */}
+        <div className="mx-auto flex max-w-[1267px] items-center justify-between gap-6 rounded-full border border-brand-red/50 bg-black/50 px-5 py-3 backdrop-blur-md lg:h-[85px] lg:py-0 lg:pl-8 lg:pr-6 xl:pl-[72px] xl:pr-16">
           <Link href="/" className="flex items-center gap-2" aria-label="SV Tech home">
             <Image
               src="/images/logos/logo.svg"
@@ -32,9 +49,9 @@ export function Navbar() {
             />
           </Link>
 
-          <nav className="hidden items-center gap-6 lg:flex xl:gap-7">
+          <nav className="hidden items-center lg:flex lg:gap-4 xl:gap-7">
             {NAV_ITEMS.map((item) => {
-              const active = isActiveHref(item.href, pathname);
+              const active = isActiveHref(item.href, pathname, item.activePrefix);
               return (
                 <Link
                   key={item.label}
@@ -43,7 +60,10 @@ export function Navbar() {
                   className={cn(
                     // px-2 matches the 8px padding in Figma; min-h-[44px] is an
                     // accessibility deviation from the design's 41.6px hit area.
-                    "group inline-flex min-h-[44px] items-center gap-1.5 rounded-[10px] px-2 text-[15px] tracking-tight transition-colors",
+                    // whitespace-nowrap + shrink-0 stop two-word labels like
+                    // "About Us" breaking onto a second line when the row gets
+                    // tight between lg and xl.
+                    "group inline-flex min-h-[44px] shrink-0 items-center gap-1.5 whitespace-nowrap rounded-[10px] px-2 text-[15px] tracking-tight transition-colors",
                     active
                       ? "font-bold text-brand-red"
                       : "font-normal text-white/90 hover:text-white",
@@ -64,7 +84,9 @@ export function Navbar() {
           <div className="flex items-center gap-3">
             <Link
               href="#contact"
-              className="hidden items-center justify-center gap-2 rounded-full bg-brand-red px-6 py-3 text-sm font-semibold text-white shadow-btn-inset-sm transition-all hover:brightness-110 lg:inline-flex lg:h-[41px] lg:min-w-[219px]"
+              // Figma's 219px width is measured at 1727px and crowds the nav at
+              // 1024px, so it only applies from xl up; at lg the button hugs.
+              className="hidden shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-full bg-brand-red px-6 py-3 text-sm font-semibold text-white shadow-btn-inset-sm transition-all hover:brightness-110 lg:inline-flex lg:h-[41px] xl:min-w-[219px]"
             >
               Contact Us
             </Link>
@@ -88,7 +110,7 @@ export function Navbar() {
         >
           <nav className="flex flex-col gap-1 px-4">
             {NAV_ITEMS.map((item) => {
-              const active = isActiveHref(item.href, pathname);
+              const active = isActiveHref(item.href, pathname, item.activePrefix);
               return (
                 <Link
                   key={item.label}

@@ -16,13 +16,16 @@ const SIZE_STYLES: Record<ButtonSize, string> = {
   sm: "h-9 px-4 text-xs font-medium rounded-[6.79px]",
   md: "h-[54px] px-8 text-base font-medium rounded-[13.9px]",
   lg: "h-[59px] px-11 text-lg font-medium rounded-[14.98px]",
-  // About page CTA band — Figma 239:1689/1690
-  cta: "h-[40px] px-[30.29px] text-[18.23px] font-semibold rounded-[10.1px]",
+  // About page CTA band — Figma 239:1689/1690. Figma's 40px is under the 44px
+  // touch-target guideline, so touch-sized screens get 44px and the exact
+  // Figma height is restored at lg, where the input is a mouse.
+  cta: "min-h-[44px] px-[30.29px] text-[18.23px] font-semibold rounded-[10.1px] lg:h-[40px] lg:min-h-0",
   // Service page hero — Figma 239:1707/1708
   hero: "h-[48px] px-[36.34px] text-[21.88px] font-semibold rounded-[12.11px]",
-  // Service card chip — Figma 239:1825. 27px clears WCAG 2.2 AA target size
-  // (24x24) but not the 44px AAA guideline.
-  chip: "h-[27px] px-[20.38px] text-[12.27px] font-semibold rounded-[6.79px]",
+  // Service card chip — Figma 239:1825 draws this at 27px, which clears WCAG
+  // 2.2 AA target size (24x24) but fails the 44px guideline. Same treatment as
+  // `cta`: 44px on touch, exact 27px from lg up.
+  chip: "min-h-[44px] px-[20.38px] text-[12.27px] font-semibold rounded-[6.79px] lg:h-[27px] lg:min-h-0",
 };
 
 const VARIANT_STYLES: Record<ButtonVariant, string> = {

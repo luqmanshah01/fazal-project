@@ -123,8 +123,11 @@ export function ContactForm() {
                         </option>
                       ))}
                     </select>
+                    {/* Purely visual — the native select already announces
+                        itself, so the chevron must not be read out. */}
                     <Icon
                       icon="mdi:chevron-down"
+                      aria-hidden="true"
                       className="pointer-events-none absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 text-black/40"
                     />
                     {errors.concern ? (

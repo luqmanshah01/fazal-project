@@ -2,9 +2,24 @@ import { Container } from "@/components/ui/Container";
 import { GradientText } from "@/components/ui/GradientText";
 import { Reveal } from "@/components/ui/Reveal";
 import { PROCESS_STEPS } from "@/lib/data";
+import type { ProcessStep } from "@/lib/types";
+import type { ComponentProps } from "react";
+
+type Gradient = ComponentProps<typeof GradientText>["gradient"];
+
+type ProcessStepsProps = {
+  steps?: ProcessStep[];
+  heading?: { start: string; middle: string; end: string };
+  gradientStart?: Gradient;
+  gradientEnd?: Gradient;
+  /** Figma H2 box — 754px on Cybersecurity, 1065px on IT Infrastructure */
+  headingMaxWidthClass?: string;
+};
 
 /**
- * 4-step engagement process — Figma node 239:1833 (1727 x 644, #F9F9F9).
+ * 4-step engagement process — Figma nodes 239:1833 (Cybersecurity) and
+ * 341:3687 (IT Infrastructure). Both are 1727 x 644 on #F9F9F9 with identical
+ * geometry; only the copy and gradient stops differ, so they are props.
  *
  * Figma exports four 156px "icons" that are byte-identical and contain no
  * glyph — each is three concentric circles (#FFEDED r78, #FF8080 r54,
@@ -15,24 +30,38 @@ import { PROCESS_STEPS } from "@/lib/data";
  * transparent-to-black gradient. They only make sense in the 4-across desktop
  * layout, so they are hidden once the steps stack.
  */
-export function ProcessSteps() {
+export function ProcessSteps({
+  steps = PROCESS_STEPS,
+  heading = {
+    start: "Our",
+    middle: "4-Step Cybersecurity Engagement",
+    end: "Process",
+  },
+  gradientStart = "redBlack22",
+  gradientEnd = "blackRed55",
+  headingMaxWidthClass = "max-w-[754px]",
+}: ProcessStepsProps = {}) {
   return (
     <section id="process" className="w-full bg-surface-soft py-16 lg:py-20">
       <Container>
         <Reveal>
-          <h2 className="text-center font-sans text-[clamp(1.875rem,3.71vw,64px)] font-extrabold leading-[1.16] tracking-[-0.0159em] text-black">
-            <GradientText gradient="redBlack22">Our</GradientText> 4-Step
-            Cybersecurity Engagement{" "}
-            <GradientText gradient="blackRed55">Process</GradientText>
+          <h2
+            className={`mx-auto text-center font-sans text-[clamp(1.875rem,3.71vw,64px)] font-extrabold leading-[1.16] tracking-[-0.0159em] text-black ${headingMaxWidthClass}`}
+          >
+            <GradientText gradient={gradientStart}>
+              {heading.start}
+            </GradientText>{" "}
+            {heading.middle}{" "}
+            <GradientText gradient={gradientEnd}>{heading.end}</GradientText>
           </h2>
         </Reveal>
 
         <ol className="mt-12 grid grid-cols-1 gap-12 sm:grid-cols-2 lg:mt-16 lg:grid-cols-4 lg:gap-8">
-          {PROCESS_STEPS.map((step, i) => (
+          {steps.map((step, i) => (
             <Reveal key={step.number} delay={i * 0.05}>
               <li className="relative flex flex-col items-center text-center">
                 {/* Dashed connector to the next step — desktop only */}
-                {i < PROCESS_STEPS.length - 1 ? (
+                {i < steps.length - 1 ? (
                   <span
                     aria-hidden="true"
                     className="absolute left-[calc(50%+78px)] top-[78px] hidden h-px w-[calc(100%-156px+2rem)] bg-[repeating-linear-gradient(90deg,rgba(0,0,0,0.45)_0_4px,transparent_4px_8px)] lg:block"

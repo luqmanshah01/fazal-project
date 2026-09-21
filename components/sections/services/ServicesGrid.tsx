@@ -3,6 +3,23 @@ import { Container } from "@/components/ui/Container";
 import { GradientText } from "@/components/ui/GradientText";
 import { Reveal } from "@/components/ui/Reveal";
 import { SECURITY_SERVICES } from "@/lib/data";
+import type { ComponentProps } from "react";
+
+type Gradient = ComponentProps<typeof GradientText>["gradient"];
+
+type GridService = { title: string; description: string; cta?: string };
+
+type ServicesGridProps = {
+  services?: GridService[];
+  heading?: { start: string; middle: string; end: string };
+  lede?: string;
+  gradientStart?: Gradient;
+  gradientEnd?: Gradient;
+  headingMaxWidthClass?: string;
+  ledeMaxWidthClass?: string;
+  /** Figma draws chip CTAs on the Cybersecurity cards but not on the MSP ones */
+  showChips?: boolean;
+};
 
 /**
  * Cybersecurity services — Figma node 239:1797 (1727 x 1058).
@@ -58,7 +75,20 @@ function GridRules() {
   );
 }
 
-export function ServicesGrid() {
+export function ServicesGrid({
+  services = SECURITY_SERVICES,
+  heading = {
+    start: "Our",
+    middle: "Cybersecurity Services Built for Pakistan's Enterprise",
+    end: "Environment",
+  },
+  lede = "Every organization has a unique threat profile. Our cybersecurity services are modular you can engage us for a single service or a fully managed security program across all domains.",
+  gradientStart = "redBlack27b",
+  gradientEnd = "blackRed56",
+  headingMaxWidthClass = "max-w-[1330px]",
+  ledeMaxWidthClass = "max-w-[1015px]",
+  showChips = true,
+}: ServicesGridProps = {}) {
   return (
     <section
       id="services"
@@ -72,26 +102,27 @@ export function ServicesGrid() {
 
       <Container>
         <Reveal>
-          <h2 className="text-center font-sans text-[clamp(2rem,4.1vw,70.75px)] font-extrabold leading-[1.16] tracking-[-0.0316em] text-black">
-            <GradientText gradient="redBlack27b">Our</GradientText>{" "}
-            Cybersecurity Services Built
-            <br className="hidden md:block" /> for Pakistan&apos;s Enterprise{" "}
-            <GradientText gradient="blackRed56">Environment</GradientText>
+          <h2
+            className={`mx-auto text-center font-sans text-[clamp(2rem,4.1vw,70.75px)] font-extrabold leading-[1.16] tracking-[-0.0316em] text-black ${headingMaxWidthClass}`}
+          >
+            <GradientText gradient={gradientStart}>{heading.start}</GradientText>{" "}
+            {heading.middle}{" "}
+            <GradientText gradient={gradientEnd}>{heading.end}</GradientText>
           </h2>
         </Reveal>
 
         <Reveal delay={0.05}>
-          <p className="mx-auto mt-8 max-w-[1015px] text-center text-base font-light leading-relaxed tracking-[-0.0842em] text-black sm:text-lg lg:text-[clamp(1.125rem,1.54vw,26.53px)]">
-            Every organization has a unique threat profile. Our cybersecurity
-            services are modular you can engage us for a single service or a
-            fully managed security program across all domains.
+          <p
+            className={`mx-auto mt-8 text-center text-base font-light leading-relaxed tracking-[-0.0842em] text-black sm:text-lg lg:text-[clamp(1.125rem,1.54vw,26.53px)] ${ledeMaxWidthClass}`}
+          >
+            {lede}
           </p>
         </Reveal>
 
         <div className="relative mt-12 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:mt-16 lg:grid-cols-3 lg:gap-0">
           <GridRules />
 
-          {SECURITY_SERVICES.map((service, i) => (
+          {services.map((service, i) => (
             <Reveal key={service.title} delay={i * 0.04}>
               <div className="flex h-full flex-col items-center gap-4 px-4 text-center lg:px-10 lg:py-12">
                 <h3 className="whitespace-pre-line font-sans text-[clamp(1.25rem,1.62vw,28px)] font-extrabold leading-tight tracking-[-0.0364em] text-black">
@@ -100,14 +131,16 @@ export function ServicesGrid() {
                 <p className="text-[clamp(0.9375rem,1.1vw,19px)] font-light leading-snug tracking-[-0.0537em] text-ink-500">
                   {service.description}
                 </p>
-                <Button
-                  href="#contact"
-                  variant="primary"
-                  size="chip"
-                  className="mt-2"
-                >
-                  {service.cta}
-                </Button>
+                {showChips && service.cta ? (
+                  <Button
+                    href="#contact"
+                    variant="primary"
+                    size="chip"
+                    className="mt-2"
+                  >
+                    {service.cta}
+                  </Button>
+                ) : null}
               </div>
             </Reveal>
           ))}

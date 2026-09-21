@@ -16,11 +16,13 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <main className="flex min-h-screen flex-col">
+      <main className="flex min-h-svh flex-col">
         <Hero />
-        <Partners />
         <About />
         <Services />
+        {/* Figma 97:561 "Section 3 clients" sits at y2643 — after Services
+            (ends 2613) and before the CTA band (starts 2881). */}
+        <Partners />
         <CTABanner />
         <WhyChoose />
         <Industries />

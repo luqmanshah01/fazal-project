@@ -22,14 +22,16 @@ export function Hero() {
       <div className="absolute inset-0 -z-10 bg-brand-red/10 mix-blend-multiply" />
 
       <div className="mx-auto flex w-full max-w-[1440px] flex-col items-center px-6 pt-32 pb-20 text-center sm:pt-40 sm:pb-24 lg:py-32">
+        {/* 331.67 x 25.61 pill, fill rgba(255,80,80,.1), border rgba(255,80,80,.3) */}
         <Reveal>
-          <span className="inline-flex items-center rounded-full border border-white/30 bg-white/5 px-5 py-1.5 text-[13px] tracking-tight text-white backdrop-blur-sm">
+          <span className="inline-flex items-center rounded-full border border-brand-red/30 bg-brand-red-soft px-5 py-1 text-[12.81px] tracking-tight text-white backdrop-blur-sm">
             Pakistan&apos;s #1 Enterprise Cybersecurity Company
           </span>
         </Reveal>
 
+        {/* H1 box is 1325.57 wide in Figma — it decides the wrap point */}
         <Reveal delay={0.1}>
-          <h1 className="mt-8 font-sans text-[clamp(2rem,4.69vw,81px)] font-extrabold leading-[1.12] tracking-[-0.023em]">
+          <h1 className="mx-auto mt-8 max-w-[1326px] font-sans text-[clamp(2rem,4.69vw,81px)] font-extrabold leading-[1.124] tracking-[-0.0231em]">
             <GradientText gradient="hero">Cybersecurity</GradientText>
             <span className="text-white"> Services in Pakistan</span>
             <br className="hidden sm:block" />
@@ -39,7 +41,8 @@ export function Hero() {
         </Reveal>
 
         <Reveal delay={0.2}>
-          <p className="mx-auto mt-8 max-w-[1160px] text-base leading-relaxed text-white/90 sm:text-lg lg:text-[22px] lg:leading-[1.35]">
+          {/* 1151.25 x 97 box, Bricolage Regular 25.612px on a 32.01px line */}
+          <p className="mx-auto mt-8 max-w-[1152px] text-base leading-relaxed text-white/90 sm:text-lg lg:text-[clamp(1.25rem,1.48vw,25.61px)] lg:leading-[1.25]">
             SV Tech powers Pakistan&apos;s leading enterprises with global-grade
             cybersecurity solutions, managed IT infrastructure, and end-to-end
             digital transformation backed by{" "}

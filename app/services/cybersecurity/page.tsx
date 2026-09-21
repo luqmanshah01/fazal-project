@@ -25,7 +25,7 @@ export default function CybersecurityServicePage() {
   return (
     <>
       <Navbar />
-      <main className="flex min-h-screen flex-col">
+      <main className="flex min-h-svh flex-col">
         <ServiceHero />
         <ThreatLandscape />
         <ServicesGrid />

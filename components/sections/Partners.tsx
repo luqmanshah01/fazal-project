@@ -10,17 +10,26 @@ export function Partners() {
   return (
     <section className="w-full bg-white py-10 md:py-14">
       <Container>
+        {/* Figma 97:563 — 64px on a 72px line box, tracking -0.0234em.
+            The design says "Our Customers", not "Our Partners". */}
         <Reveal>
-          <h2 className="text-center font-sans text-4xl font-extrabold tracking-[-0.023em] text-black sm:text-5xl lg:text-[64px] lg:leading-[1.12]">
-            <GradientText gradient="redBlack">Our</GradientText>{" "}
-            <span>Partners</span>
+          <h2 className="text-center font-sans text-4xl font-extrabold tracking-[-0.0234em] text-black sm:text-5xl lg:text-[64px] lg:leading-[1.125]">
+            <GradientText gradient="homePartners">Our</GradientText>{" "}
+            <span>Customers</span>
           </h2>
         </Reveal>
       </Container>
 
       <div className="relative mt-10 w-full overflow-hidden">
-        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-white to-transparent md:w-40" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-white to-transparent md:w-40" />
+        {/* Edge fades — Figma 97:578/579, decorative only */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-white to-transparent md:w-40"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-white to-transparent md:w-40"
+        />
 
         <div className="flex w-max animate-marquee items-center gap-10 py-3 md:gap-14">
           {loop.map((partner, i) => (

@@ -53,11 +53,16 @@ export function Stat({ value, label, className }: StatProps) {
 
   return (
     <div ref={ref} className={cn("flex flex-col items-center gap-2", className)}>
-      <span className="pt-0.5 align-middle font-sans text-[40px] font-extrabold leading-[1.2] tracking-[-1px] sm:text-[50.88px] sm:leading-[62.86px] sm:tracking-[-1.31px]">
-        <span className="text-gradient-stat-dark">{shown}</span>
-        <span className="text-brand-red">{suffix}</span>
+      {/*
+        Figma 97:587-594: 55.876px on a 62.86px line, tracking -0.0234em, and
+        the whole value (number + suffix) carries one gradient —
+        125deg #000 -> #FF5050 95%, i.e. the shared .text-gradient-stat.
+      */}
+      <span className="text-gradient-stat pt-0.5 align-middle font-sans text-[40px] font-extrabold leading-[1.125] tracking-[-0.0234em] sm:text-[55.88px]">
+        {shown}
+        {suffix}
       </span>
-      <span className="whitespace-pre-line text-center text-[15px] font-normal leading-snug text-black sm:text-[18px]">
+      <span className="whitespace-pre-line text-center text-[15px] font-normal leading-[1.05] text-black sm:text-[20.95px]">
         {label}
       </span>
     </div>

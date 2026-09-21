@@ -75,14 +75,16 @@ body {
 }
 
 /* Gradient text utilities used by hero + section headings */
+/* Home hero — measured from Figma 97:517 (ts1 / ts3). Used only by the home
+   hero, so the stops are corrected here rather than behind a new key. */
 .text-gradient-hero {
-  background: linear-gradient(90deg, #ff5050 0%, #ffffff 38%);
+  background: linear-gradient(90deg, #ff5050 14%, #ffffff 44%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 .text-gradient-hero-end {
-  background: linear-gradient(90deg, #ffffff 60%, #ff5050 92%);
+  background: linear-gradient(90deg, #ffffff 64%, #ff5050 92%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -266,6 +268,204 @@ body {
 }
 .text-gradient-black-red-74 {
   background-image: linear-gradient(90deg, #000000 74%, #ff5050 85%);
+}
+
+/* IT Infrastructure page gradients — Figma node 341:3591. Same rule as above:
+   background-image only, never the `background` shorthand.
+   The Services Grid "Complete" word measures #FF5050 12% -> #000000 27%, which
+   is identical to .text-gradient-red-black-27b, so it is reused rather than
+   duplicated. */
+.text-gradient-infra-hero-start,
+.text-gradient-infra-hero-end,
+.text-gradient-infra-overview-end,
+.text-gradient-infra-grid-end,
+.text-gradient-infra-process-start,
+.text-gradient-infra-process-end,
+.text-gradient-infra-faq-start,
+.text-gradient-infra-faq-end {
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+/* Hero — "Managed" / "Uptime" */
+.text-gradient-infra-hero-start {
+  background-image: linear-gradient(90deg, #ff5050 11%, #ffffff 32%);
+}
+.text-gradient-infra-hero-end {
+  background-image: linear-gradient(90deg, #ffffff 64%, #ff5050 89%);
+}
+/* Overview — "End-to-End" */
+.text-gradient-infra-overview-end {
+  background-image: linear-gradient(90deg, #000000 45%, #ff5050 75%);
+}
+/* Services Grid — "Every Layer" (the "Complete" word reuses red-black-27b) */
+.text-gradient-infra-grid-end {
+  background-image: linear-gradient(90deg, #000000 59%, #ff5050 87%);
+}
+/* Process — "How" / "Pakistan" */
+.text-gradient-infra-process-start {
+  background-image: linear-gradient(90deg, #ff5050 17%, #000000 32%);
+}
+.text-gradient-infra-process-end {
+  background-image: linear-gradient(90deg, #000000 66%, #ff5050 92%);
+}
+/* FAQ — "Your" / "Answered" */
+.text-gradient-infra-faq-start {
+  background-image: linear-gradient(90deg, #ff5050 7%, #000000 14%);
+}
+.text-gradient-infra-faq-end {
+  background-image: linear-gradient(90deg, #000000 69%, #ff5050 89%);
+}
+
+/* Case Studies page gradients — Figma node 341:3962. Two of its five gradient
+   words reuse existing keys:
+     "Form"                    -> .text-gradient-red-black-22
+     "Solution" / "Categories" -> .text-gradient-black-red-55   */
+.text-gradient-cs-hero-start,
+.text-gradient-cs-hero-end,
+.text-gradient-cs-faq-start {
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+/* Hero — "Real-Word" / "Stories" (ts1 / ts3) */
+.text-gradient-cs-hero-start {
+  background-image: linear-gradient(90deg, #ff5050 16%, #ffffff 43%);
+}
+.text-gradient-cs-hero-end {
+  background-image: linear-gradient(90deg, #ffffff 53%, #ff5050 74%);
+}
+/* FAQ — "Frequently" (ts7) */
+.text-gradient-cs-faq-start {
+  background-image: linear-gradient(90deg, #ff5050 21%, #000000 45%);
+}
+
+/* Blog page gradients — Figma node 341:4370. Two of its seven gradient words
+   measure identically to existing keys and are reused:
+     "Insights" (Core Areas) -> .text-gradient-home-industries-start
+     "Practical"             -> .text-gradient-red-black-27b          */
+.text-gradient-blog-hero-start,
+.text-gradient-blog-hero-end,
+.text-gradient-blog-list-end,
+.text-gradient-blog-areas-end,
+.text-gradient-blog-faq-start {
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+/* Hero — "IT," / "Insights" (ts1 / ts2) */
+.text-gradient-blog-hero-start {
+  background-image: linear-gradient(90deg, #ff5050 4%, #ffffff 20%);
+}
+.text-gradient-blog-hero-end {
+  background-image: linear-gradient(90deg, #ffffff 75%, #ff5050 87%);
+}
+/* SV Tech Blogs — "Blogs" (ts4) */
+.text-gradient-blog-list-end {
+  background-image: linear-gradient(90deg, #000000 62%, #ff5050 91%);
+}
+/* Insights Across Core Areas — "Areas" (ts7) */
+.text-gradient-blog-areas-end {
+  background-image: linear-gradient(90deg, #000000 69%, #ff5050 93%);
+}
+/* FAQ — "Frequently" (ts5) */
+.text-gradient-blog-faq-start {
+  background-image: linear-gradient(90deg, #ff5050 10%, #000000 40%);
+}
+
+/* Managed Service Provider page gradients — Figma node 425:4124.
+   Three of this page's nine gradient words measure identically to keys that
+   already exist, so they are reused rather than duplicated:
+     Process "How"      -> .text-gradient-red-black-22
+     Process "Pakistan" -> .text-gradient-black-red-55
+     FAQ "Most"         -> .text-gradient-infra-faq-end            */
+.text-gradient-msp-hero-start,
+.text-gradient-msp-hero-end,
+.text-gradient-msp-overview-end,
+.text-gradient-msp-grid-start,
+.text-gradient-msp-grid-end,
+.text-gradient-msp-faq-start {
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+/* Hero — "Managed" appears at both ends with different stops (ts1 / ts2) */
+.text-gradient-msp-hero-start {
+  background-image: linear-gradient(90deg, #ff5050 15%, #ffffff 36%);
+}
+.text-gradient-msp-hero-end {
+  background-image: linear-gradient(90deg, #ffffff 57%, #ff5050 83%);
+}
+/* Overview — "Pakistan" (ts4) */
+.text-gradient-msp-overview-end {
+  background-image: linear-gradient(90deg, #000000 22%, #ff5050 84%);
+}
+/* Services Grid — "What" / "Covers" (ts7 / ts8) */
+.text-gradient-msp-grid-start {
+  background-image: linear-gradient(90deg, #ff5050 3%, #000000 27%);
+}
+.text-gradient-msp-grid-end {
+  background-image: linear-gradient(90deg, #000000 64%, #ff5050 88%);
+}
+/* FAQ — "Managed" (ts11) */
+.text-gradient-msp-faq-start {
+  background-image: linear-gradient(90deg, #ff5050 35%, #000000 54%);
+}
+
+/* Home page gradients — measured per section from Figma node 97:506.
+   Every section has its own stops; the generic .text-gradient-red-black /
+   -black-red pair was standing in for all six and matched none of them.
+   The FAQ pair matches the service page exactly, so it reuses
+   .text-gradient-red-black-46 / -black-red-74 instead of duplicating. */
+.text-gradient-home-about-start,
+.text-gradient-home-about-end,
+.text-gradient-home-services-start,
+.text-gradient-home-services-end,
+.text-gradient-home-why-start,
+.text-gradient-home-why-end,
+.text-gradient-home-industries-start,
+.text-gradient-home-industries-end,
+.text-gradient-home-brands,
+.text-gradient-home-partners {
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+/* About — "Pakistan's" / "Company" (ts5 / ts6) */
+.text-gradient-home-about-start {
+  background-image: linear-gradient(90deg, #ff5050 13%, #000000 41%);
+}
+.text-gradient-home-about-end {
+  background-image: linear-gradient(90deg, #000000 28%, #ff5050 63%);
+}
+/* Services — "End-to-End" / "Enterprises" (ts7 / ts9) */
+.text-gradient-home-services-start {
+  background-image: linear-gradient(90deg, #ff5050 13%, #000000 32%);
+}
+.text-gradient-home-services-end {
+  background-image: linear-gradient(90deg, #000000 69%, #ff5050 85%);
+}
+/* Why SV Tech — "Why" / "Cybersecurity" (ts10 / ts11) */
+.text-gradient-home-why-start {
+  background-image: linear-gradient(90deg, #ff5050 1%, #000000 15%);
+}
+.text-gradient-home-why-end {
+  background-image: linear-gradient(90deg, #000000 32%, #ff5050 51%);
+}
+/* Industries — "Cybersecurity" / "Pakistan" (ts12 / ts13) */
+.text-gradient-home-industries-start {
+  background-image: linear-gradient(90deg, #ff5050 15%, #000000 32%);
+}
+.text-gradient-home-industries-end {
+  background-image: linear-gradient(90deg, #000000 25%, #ff5050 45%);
+}
+/* Testimonials — "Brands" (ts14). Figma draws a gradient, not solid red. */
+.text-gradient-home-brands {
+  background-image: linear-gradient(90deg, #000000 35%, #ff5050 71%);
+}
+/* Our Customers — "Our" (ts19) */
+.text-gradient-home-partners {
+  background-image: linear-gradient(90deg, #ff5050 21%, #000000 35%);
 }
 
 /* Honour the OS "reduce motion" setting for the looping CSS animations.
