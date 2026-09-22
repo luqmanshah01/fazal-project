@@ -31,7 +31,10 @@ export function AboutHero() {
         <Reveal delay={0.1}>
           {/* max-w 1346px is the Figma text box, which is what forces the
               two-line break at the design width */}
-          <h1 className="mx-auto mt-8 max-w-[1346px] font-sans text-[clamp(2rem,4.69vw,81px)] font-extrabold leading-[1.12] tracking-[-0.0231em]">
+          {/* Figma 239:1465 — the eyebrow pill ends at y334 (y308 + 26) and the
+              H1 box starts at y339, so the gap is 5px. `mt-8` was giving 32.
+              ServiceHero already carries its own measured 16px as lg:mt-4. */}
+          <h1 className="mx-auto mt-8 max-w-[1346px] font-sans text-[clamp(2rem,4.69vw,81px)] font-extrabold leading-[1.12] tracking-[-0.0231em] lg:mt-[5px]">
             <GradientText gradient="aboutHeroStart">
               {ABOUT_HERO.headingStart}
             </GradientText>{" "}

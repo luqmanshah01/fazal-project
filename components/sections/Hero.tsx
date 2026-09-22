@@ -31,7 +31,16 @@ export function Hero() {
 
         {/* H1 box is 1325.57 wide in Figma — it decides the wrap point */}
         <Reveal delay={0.1}>
-          <h1 className="mx-auto mt-8 max-w-[1326px] font-sans text-[clamp(2rem,4.69vw,81px)] font-extrabold leading-[1.124] tracking-[-0.0231em]">
+          {/*
+            DERIVED, not measured — 97:506 has not been fetched. The two heroes
+            that HAVE been measured both put the H1 close under the pill:
+            About (239:1465) 5px, Cybersecurity (239:1694) 16px. This hero's
+            pill carries a long label like the Cybersecurity one (not About's
+            short "Who We Are"), so it takes that hero's 16px rather than
+            About's 5px. `mt-8` was giving 32px on every one of them.
+            Re-measure when 97:506 can be fetched.
+          */}
+          <h1 className="mx-auto mt-8 max-w-[1326px] font-sans text-[clamp(2rem,4.69vw,81px)] font-extrabold leading-[1.124] tracking-[-0.0231em] lg:mt-4">
             <GradientText gradient="hero">Cybersecurity</GradientText>
             <span className="text-white"> Services in Pakistan</span>
             <br className="hidden sm:block" />
