@@ -20,6 +20,11 @@ type BlogListProps = {
   ledeMaxWidthClass?: string;
   emptyLabel?: string;
   id?: string;
+  /**
+   * Figma frame height at 1727px, as an `lg:min-h-*` class. Blog (341:4461)
+   * measures 908. The Events frame has not been fetched, so that page passes "".
+   */
+  minHeightClass?: string;
 };
 
 /**
@@ -49,6 +54,7 @@ export function BlogList({
   ledeMaxWidthClass = "max-w-[972px]",
   emptyLabel = "articles",
   id = "blog-list",
+  minHeightClass = "lg:min-h-[908px]",
 }: BlogListProps = {}) {
   const [active, setActive] = useState(filters[0]);
 
@@ -58,7 +64,11 @@ export function BlogList({
       : allPosts.filter((post) => post.topic === active);
 
   return (
-    <section id={id} className="w-full bg-surface-soft py-16 lg:py-20">
+    // Figma 341:4461 — 1729 x 908
+    <section
+      id={id}
+      className={`w-full bg-surface-soft py-16 lg:py-20 ${minHeightClass}`}
+    >
       <div className="mx-auto w-full max-w-[1445px] px-6 sm:px-8 lg:px-12">
         <Reveal>
           <h2

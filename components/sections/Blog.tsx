@@ -8,7 +8,9 @@ import { BLOG_POSTS } from "@/lib/data";
 export function Blog() {
   return (
     <section id="blog" className="relative w-full bg-white py-16 md:py-20">
-      <Container>
+      {/* Figma 97:777-792 — the card row is 1386.56px wide (3 x 447.42 on a
+          22.15px gap). 1386.56 + 96px of `lg` padding = 1483px. */}
+      <Container maxWidthClass="max-w-[1483px]">
         <SectionHeading
           eyebrow="Insights"
           titleMaxWidthClass="max-w-[1079px]"

@@ -55,12 +55,15 @@ export default function EventsPage() {
           headingMaxWidthClass="max-w-[537px]"
           ledeMaxWidthClass="max-w-[764px]"
           emptyLabel="events"
+          // 341:4294 not fetched — 5 filter pills here vs Blog's 4
+          minHeightClass=""
         />
         <ServiceFAQ
           faqs={EVENTS_FAQS}
           heading={EVENTS_FAQ_HEADING}
           gradientStart="blogFaqStart"
           headingMaxWidthClass="max-w-[786px]"
+          minHeightClass=""
         />
         <ServiceCTA content={EVENTS_CTA} />
       </main>

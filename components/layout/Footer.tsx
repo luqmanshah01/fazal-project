@@ -14,7 +14,14 @@ const SOCIALS = [
 export function Footer() {
   return (
     <footer className="relative w-full overflow-hidden bg-black text-white">
-      <Container className="pt-24 pb-8 md:pt-28">
+      {/*
+        Figma 239:1510 — the 1728px frame holds a 1454 x 462 inner block with
+        181.799px of side padding, so the content row is 1090.79px wide (the
+        top row measures 1090.79 exactly). That is NARROWER than the 1420px
+        section default, so it is set explicitly: 1090.79 + 96px of `lg`
+        padding = 1187px.
+      */}
+      <Container maxWidthClass="max-w-[1187px]" className="pt-24 pb-8 md:pt-28">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>
             <Image

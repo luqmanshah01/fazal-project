@@ -12,9 +12,23 @@ import { THREAT_INTRO, THREAT_STATS } from "@/lib/data";
  */
 export function ThreatLandscape() {
   return (
-    <section id="threat-landscape" className="w-full bg-surface-soft py-16 lg:py-20">
+    /* Figma 239:1785 — 1727 x 692. H2 starts at y84 and the second stat card
+       ends at 608 (y376 + 232), so the frame is 84 top / 84 bottom. */
+    <section
+      id="threat-landscape"
+      className="w-full bg-surface-soft py-16 lg:min-h-[692px] lg:py-[84px]"
+    >
       <Container>
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[796fr_521fr] lg:gap-16">
+        {/*
+          Figma 239:1785 — the body column is 796 wide at x152 and the stat
+          cards are 481 wide at x1093, so the gutter between them is 145px
+          (1093 - 948), not the 64px `gap-16` was giving. The 521fr right
+          column was compensating for that wrong gap and rendered the cards
+          ~55px too wide. Ratio and gutter are both taken from Figma now, with
+          the gutter scaled by the project's own rule (145 / 1727 = 8.4vw) so
+          it does not eat the layout at 1024px.
+        */}
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[796fr_481fr] lg:gap-[clamp(2rem,8.4vw,145px)]">
           <div>
             <Reveal>
               <h2 className="font-sans text-[clamp(1.875rem,3.71vw,64px)] font-extrabold leading-[1.16] tracking-[-0.0159em] text-black">

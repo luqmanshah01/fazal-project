@@ -629,6 +629,8 @@ export const INFRA_OVERVIEW: ServiceOverviewContent = {
   imageAspectClass: "aspect-[562/634]",
   imageFrameClass: "rounded-[35px] border-2 border-brand-red shadow-card",
   imageOverlayClass: "",
+  // Figma 341:3682 — 1727 x 792
+  minHeightClass: "lg:min-h-[792px]",
 };
 
 export const INFRA_SERVICES_INTRO = {
@@ -1279,6 +1281,8 @@ export const MSP_OVERVIEW: ServiceOverviewContent = {
   imageAspectClass: "aspect-[562/524]",
   imageFrameClass: "",
   imageOverlayClass: "bg-[rgba(255,80,80,0.8)] mix-blend-multiply",
+  // Figma 425:4216 — 1727 x 628
+  minHeightClass: "lg:min-h-[628px]",
 };
 
 export const MSP_SERVICES_INTRO = {

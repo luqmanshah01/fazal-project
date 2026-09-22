@@ -56,6 +56,8 @@ export default function ManagedServiceProviderPage() {
           headingMaxWidthClass="max-w-[927px]"
           ledeMaxWidthClass="max-w-[1015px]"
           showChips={false}
+          // MSP frame not fetched yet — no measured height to assert
+          minHeightClass=""
         />
         <ProcessSteps
           steps={MSP_PROCESS_STEPS}
@@ -69,6 +71,7 @@ export default function ManagedServiceProviderPage() {
           heading={MSP_FAQ_HEADING}
           gradientStart="mspFaqStart"
           gradientEnd="infraFaqEnd"
+          minHeightClass=""
         />
         {/*
           Figma 425:4208 reuses the Cybersecurity CTA word for word — same

@@ -42,8 +42,21 @@ export function ProcessSteps({
   headingMaxWidthClass = "max-w-[754px]",
 }: ProcessStepsProps = {}) {
   return (
-    <section id="process" className="w-full bg-surface-soft py-16 lg:py-20">
-      <Container>
+    /* Figma 239:1833 — 1727 x 644, H2 at y42. Safe as a constant rather than
+       a prop: 341:3687 (IT Infrastructure) measures the same 1727 x 644 with
+       identical geometry, per the service-page spec. */
+    <section
+      id="process"
+      className="w-full bg-surface-soft py-16 lg:min-h-[644px] lg:pb-20 lg:pt-[42px]"
+    >
+      {/*
+        Figma 239:1833 — the four 156px circles sit at x246 / 606 / 966 / 1326,
+        a 360px pitch. Solving 4W + 3G = span with W + G = 360 and the circles
+        centred (246 = 144 + (360-156)/2) gives W = 360, G = 0: four equal
+        360px columns with NO gap, spanning 144 -> 1584 = 1440px.
+        1440 + 96px of `lg` padding = 1536px.
+      */}
+      <Container maxWidthClass="max-w-[1536px]">
         <Reveal>
           <h2
             className={`mx-auto text-center font-sans text-[clamp(1.875rem,3.71vw,64px)] font-extrabold leading-[1.16] tracking-[-0.0159em] text-black ${headingMaxWidthClass}`}
@@ -56,15 +69,27 @@ export function ProcessSteps({
           </h2>
         </Reveal>
 
-        <ol className="mt-12 grid grid-cols-1 gap-12 sm:grid-cols-2 lg:mt-16 lg:grid-cols-4 lg:gap-8">
+        {/* lg:gap-0 — Figma's column pitch IS the column width (see above), so
+            any gap here would shrink the columns below 360px and pull the
+            connectors out of alignment with the circles. */}
+        <ol className="mt-12 grid grid-cols-1 gap-12 sm:grid-cols-2 lg:mt-16 lg:grid-cols-4 lg:gap-0">
           {steps.map((step, i) => (
             <Reveal key={step.number} delay={i * 0.05}>
               <li className="relative flex flex-col items-center text-center">
-                {/* Dashed connector to the next step — desktop only */}
+                {/*
+                  Dashed connector — desktop only. Figma 239:1833 draws it
+                  204px wide at y324: a 2px stroke on 4,4 dashes, filled with
+                  `linear-gradient(90deg, transparent -> #000)`.
+
+                  With 360px columns, `100% - 156px` is exactly the 204px
+                  Figma measures (360 - the 156px circle). The gradient is the
+                  background and the dashes are a mask over it, because a
+                  repeating-linear-gradient cannot both fade and dash.
+                */}
                 {i < steps.length - 1 ? (
                   <span
                     aria-hidden="true"
-                    className="absolute left-[calc(50%+78px)] top-[78px] hidden h-px w-[calc(100%-156px+2rem)] bg-[repeating-linear-gradient(90deg,rgba(0,0,0,0.45)_0_4px,transparent_4px_8px)] lg:block"
+                    className="absolute left-[calc(50%+78px)] top-[78px] hidden h-[2px] w-[calc(100%-156px)] bg-[linear-gradient(90deg,transparent,#000)] [mask-image:repeating-linear-gradient(90deg,#000_0_4px,transparent_4px_8px)] lg:block"
                   />
                 ) : null}
 
@@ -84,7 +109,9 @@ export function ProcessSteps({
                 <h3 className="mt-6 whitespace-pre-line font-sans text-[clamp(1.125rem,1.19vw,20.63px)] font-extrabold leading-tight tracking-[-0.0007em] text-black">
                   {step.title}
                 </h3>
-                <p className="mt-4 max-w-[280px] text-[clamp(0.875rem,0.85vw,14.73px)] font-light leading-snug tracking-[-0.051em] text-ink-500">
+                {/* Figma body boxes run 190-223px; 223 is the widest, so it is
+                    the cap. 280px was letting these run wider than any of them. */}
+                <p className="mt-4 max-w-[223px] text-[clamp(0.875rem,0.85vw,14.73px)] font-light leading-snug tracking-[-0.051em] text-ink-500">
                   {step.body}
                 </p>
               </li>

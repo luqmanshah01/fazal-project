@@ -17,7 +17,11 @@ import { BLOG_APPROACH } from "@/lib/data";
  */
 export function BlogApproach() {
   return (
-    <section id="our-approach" className="w-full bg-white py-16 lg:py-20">
+    /* Figma 341:4529 — 1727 x 628 */
+    <section
+      id="our-approach"
+      className="w-full bg-white py-16 lg:min-h-[628px] lg:py-20"
+    >
       <div className="mx-auto grid w-full max-w-[1420px] grid-cols-1 items-center gap-12 px-6 sm:px-8 lg:grid-cols-[713fr_395fr] lg:gap-20 lg:px-12">
         <div>
           <Reveal>

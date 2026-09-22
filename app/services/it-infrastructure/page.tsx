@@ -53,6 +53,8 @@ export default function ITInfrastructureServicePage() {
           heading={INFRA_FAQ_HEADING}
           gradientStart="infraFaqStart"
           gradientEnd="infraFaqEnd"
+          // 341:3720 draws 6 rows, not Cybersecurity's 4 — height not measured
+          minHeightClass=""
         />
         <ServiceCTA content={INFRA_CTA} />
       </main>

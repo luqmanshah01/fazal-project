@@ -14,9 +14,10 @@ import { ABOUT_CTA } from "@/lib/data";
  */
 export function AboutCTA() {
   return (
+    /* Figma 239:1685 — 1728 x 524, H2 at y113, buttons ending at 411 */
     <section
       id="contact"
-      className="relative isolate w-full overflow-hidden bg-black text-white"
+      className="relative isolate w-full overflow-hidden bg-black text-white lg:min-h-[524px]"
     >
       <Image
         src="/images/backgrounds/cta-bg.png"

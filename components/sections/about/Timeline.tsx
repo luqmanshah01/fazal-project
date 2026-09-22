@@ -14,7 +14,11 @@ import { MILESTONES, TIMELINE_HEADING } from "@/lib/data";
  */
 export function Timeline() {
   return (
-    <section id="journey" className="w-full bg-white py-16 lg:py-20">
+    /* Figma 239:1564 — 1600 x 795 */
+    <section
+      id="journey"
+      className="w-full bg-white py-16 lg:min-h-[795px] lg:py-20"
+    >
       <Container>
         <Reveal>
           <h2 className="text-center font-sans text-[clamp(1.75rem,3.42vw,59.02px)] font-extrabold leading-[1.12] tracking-[-0.0234em] text-black">

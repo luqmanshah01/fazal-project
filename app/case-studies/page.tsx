@@ -47,6 +47,8 @@ export default function CaseStudiesPage() {
           id="case-study-categories"
           surfaceClass="bg-white"
           headingMaxWidthClass="max-w-[780px]"
+          // 341:4150 not fetched — cards match Blog's, the frame height may not
+          minHeightClass=""
           heading={
             <>
               Case Study{" "}
@@ -58,6 +60,7 @@ export default function CaseStudiesPage() {
           faqs={CASE_STUDY_FAQS}
           heading={CASE_STUDY_FAQ_HEADING}
           gradientStart="csFaqStart"
+          minHeightClass=""
         />
         <ServiceCTA content={CASE_STUDY_CTA} />
       </main>

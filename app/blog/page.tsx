@@ -40,6 +40,7 @@ export default function BlogPage() {
           heading={BLOG_FAQ_HEADING}
           gradientStart="blogFaqStart"
           headingMaxWidthClass="max-w-[786px]"
+          minHeightClass=""
         />
         <ServiceCTA content={BLOG_CTA} />
       </main>

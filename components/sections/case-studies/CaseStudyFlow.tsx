@@ -52,7 +52,11 @@ const STEP_POSITIONS = [
 
 export function CaseStudyFlow() {
   return (
-    <section id="case-study-flow" className="w-full bg-surface-soft py-16 lg:py-20">
+    /* Figma 341:4090 — 1727 x 948 */
+    <section
+      id="case-study-flow"
+      className="w-full bg-surface-soft py-16 lg:min-h-[948px] lg:py-20"
+    >
       <div className="mx-auto w-full max-w-[1500px] px-6 sm:px-8 lg:px-12">
         <Reveal>
           {/* 780 x 75 box, 64px on a 74.2px line, tracking -0.0159em */}

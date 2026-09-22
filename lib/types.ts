@@ -274,4 +274,10 @@ export type ServiceOverviewContent = {
   imageFrameClass: string;
   /** Optional wash laid over the photo. Empty string for no overlay. */
   imageOverlayClass: string;
+  /**
+   * Figma frame height at the 1727px design width, as an `lg:min-h-*` class.
+   * 792 on IT Infrastructure (341:3682), 628 on MSP (425:4216) — the two
+   * frames differ, so it travels with the copy like the rest of the geometry.
+   */
+  minHeightClass: string;
 };

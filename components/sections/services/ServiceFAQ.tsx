@@ -24,6 +24,13 @@ type ServiceFAQProps = {
    * other frame draws it at rgba(0,0,0,.5).
    */
   iconClassName?: string;
+  /**
+   * Figma frame height at 1727px, as an `lg:min-h-*` class. Cybersecurity
+   * (239:1866) measures 705 across 4 rows; row count differs per page, so the
+   * height does too. Pages whose frame has not been fetched pass "" rather
+   * than inheriting Cybersecurity's number.
+   */
+  minHeightClass?: string;
 };
 
 /**
@@ -51,11 +58,16 @@ export function ServiceFAQ({
   gradientEnd = "blackRed74",
   headingMaxWidthClass = "max-w-[1243px]",
   iconClassName = "text-ink-muted-50",
+  minHeightClass = "lg:min-h-[705px]",
 }: ServiceFAQProps = {}) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section id="faq" className="w-full bg-white py-16 lg:py-20">
+    // Figma 239:1866 — 1727 x 705, H2 at y60, row 4 ending at 621 (547 + 74)
+    <section
+      id="faq"
+      className={`w-full bg-white py-16 lg:pb-[84px] lg:pt-[60px] ${minHeightClass}`}
+    >
       <Container>
         <Reveal>
           {/* Figma H2 box: 1243 x 151 on the service pages, 786 x 84 on Blog */}

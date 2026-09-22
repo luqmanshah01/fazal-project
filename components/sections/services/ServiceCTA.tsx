@@ -22,9 +22,12 @@ type ServiceCTAProps = {
  */
 export function ServiceCTA({ content = SERVICE_CTA }: ServiceCTAProps = {}) {
   return (
+    /* Figma 239:1777 — 1728 x 524, H2 at y113 and the button row ending at
+       411, so 113 top / 113 bottom (already applied below). Constant, not a
+       prop: 341:3675 measures the same 1728 x 524. */
     <section
       id="contact"
-      className="relative isolate w-full overflow-hidden bg-black text-white"
+      className="relative isolate w-full overflow-hidden bg-black text-white lg:min-h-[524px]"
     >
       <Image
         src="/images/backgrounds/cta-bg.png"

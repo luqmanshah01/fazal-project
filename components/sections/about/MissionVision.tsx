@@ -16,7 +16,14 @@ import { MISSION_VISION } from "@/lib/data";
  */
 export function MissionVision() {
   return (
-    <section id="mission-vision" className="w-full bg-white py-16 lg:py-20">
+    /* min-h, not h: the Figma frame is 733px tall at 1727px with this exact
+       copy. A fixed height would clip once the type reflows at any other
+       width; a min-height lands the section on the Figma figure at the design
+       width and lets it grow anywhere else. Same rule for every section. */
+    <section
+      id="mission-vision"
+      className="w-full bg-white py-16 lg:min-h-[733px] lg:py-20"
+    >
       <Container>
         <Reveal>
           {/* Figma line-height is 61.65px against a 72.21px font — a tight 0.854 */}

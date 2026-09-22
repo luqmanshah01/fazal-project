@@ -95,6 +95,8 @@ export function Navbar() {
               type="button"
               onClick={() => setOpen((v) => !v)}
               aria-label="Toggle menu"
+              aria-expanded={open}
+              aria-controls="mobile-nav"
               className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/5 text-white lg:hidden"
             >
               <Icon icon={open ? "mdi:close" : "mdi:menu"} className="h-5 w-5" />
@@ -102,7 +104,16 @@ export function Navbar() {
           </div>
         </div>
 
+        {/*
+          `inert` while closed. The panel collapses to `max-h-0 opacity-0` but
+          stays in the DOM so the height can transition — which left its six
+          links keyboard-focusable and screen-reader-visible at every width,
+          including desktop where the menu can never be opened. `inert` is the
+          one thing that removes them without removing the animation.
+        */}
         <div
+          id="mobile-nav"
+          inert={!open}
           className={cn(
             "mt-3 overflow-hidden rounded-2xl border border-white/15 bg-black/85 backdrop-blur-lg transition-all duration-300 lg:hidden",
             open ? "max-h-[500px] py-4 opacity-100" : "max-h-0 py-0 opacity-0",

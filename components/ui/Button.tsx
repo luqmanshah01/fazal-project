@@ -66,7 +66,15 @@ export function Button(props: ButtonAsButton | ButtonAsLink) {
   } = props;
 
   const classes = cn(
-    "inline-flex items-center justify-center tracking-tight transition-all duration-150 whitespace-nowrap select-none",
+    // `whitespace-nowrap` only from sm up. The longest labels in the file —
+    // "Get a Free Cybersecurity Assessment" and "Book Your Free Security
+    // Assessment" — measure ~287px at the mobile 16px size, and with `px-8`
+    // that is ~351px against the 312px a 360px viewport leaves after the
+    // section's `px-6`. Held on one line they pushed the whole page into
+    // horizontal scroll. They wrap to two lines below sm instead; every size
+    // in use has the vertical room (the 54px `md` box fits two 16px lines).
+    // `max-w-full` stops a long label escaping a narrow grid cell.
+    "inline-flex max-w-full items-center justify-center text-center tracking-tight transition-all duration-150 whitespace-normal sm:whitespace-nowrap select-none",
     SIZE_STYLES[size],
     VARIANT_STYLES[variant],
     className,

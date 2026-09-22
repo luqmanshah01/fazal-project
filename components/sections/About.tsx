@@ -6,13 +6,30 @@ import { STATS } from "@/lib/data";
 
 export function About() {
   return (
-    <section id="about" className="relative w-full bg-white pt-2 pb-12 md:pt-4 md:pb-16">
+    /*
+      Top padding measured off the client's Figma screenshot (2026-09-22), not
+      the API — the home frame has not been fetched. Using the standard
+      357.55px eyebrow pill as the scale reference (~394px in the shot, so
+      ~1.10x), the hero's bottom edge sits ~78px above the pill, i.e. ~70px at
+      the 1727px design width. `md:pt-4` was giving 16px.
+      Re-measure this once 97:506 can be fetched.
+    */
+    <section
+      id="about"
+      className="relative w-full bg-white pb-12 pt-10 md:pb-16 lg:pt-[70px]"
+    >
       <Container>
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1.20fr_1fr] lg:gap-20">
           <div className="flex flex-col text-center lg:text-left">
             <Reveal>
-              {/* Figma 97:582 — fill rgba(255,80,80,.1), border rgba(255,80,80,.3) */}
-              <span className="inline-flex items-center rounded-full border border-brand-red/30 bg-brand-red-soft px-8 py-1.5 text-[13.81px] tracking-tight text-black sm:px-14 lg:px-20 lg:py-1">
+              {/*
+                Figma 97:582 — fill rgba(255,80,80,.1), border rgba(255,80,80,.3).
+                This is the standard 357.55 x 27.61 pill, the same one
+                `ui/SectionHeading` and `about/Principles` already use — NOT a
+                hug-width one. `lg:px-20` around 13.81px text rendered it about
+                245px, some 112px narrower than the design.
+              */}
+              <span className="inline-flex w-full max-w-[357.55px] items-center justify-center rounded-full border border-brand-red/30 bg-brand-red-soft px-4 py-1 text-[13.81px] font-normal tracking-tight text-black">
                 About SV Tech
               </span>
             </Reveal>

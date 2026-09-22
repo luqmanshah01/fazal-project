@@ -20,7 +20,8 @@ export function InfraServicesGrid() {
   return (
     <section
       id="services"
-      className="relative isolate w-full overflow-hidden bg-white py-16 lg:py-20"
+      // Figma 382:4101 — 1727 x 1143
+      className="relative isolate w-full overflow-hidden bg-white py-16 lg:min-h-[1143px] lg:py-20"
     >
       {/*
         Mask group 382:4102 — 1928.96 x 1022, drawn at (-100.74, 121) on the

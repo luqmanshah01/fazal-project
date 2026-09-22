@@ -15,7 +15,13 @@ import { PRINCIPLES } from "@/lib/data";
  */
 export function Principles() {
   return (
-    <section id="principles" className="w-full bg-white py-16 lg:py-20">
+    /* Figma 239:1665 — 1727 x 701, eyebrow pill starts at y52, last block
+       row ends at 626 (y498 + 128). So 52 top / 75 bottom, not the 80/80
+       `lg:py-20` was applying. */
+    <section
+      id="principles"
+      className="w-full bg-white py-16 lg:min-h-[701px] lg:pb-[75px] lg:pt-[52px]"
+    >
       <Container>
         <div className="flex flex-col items-center text-center">
           <Reveal>

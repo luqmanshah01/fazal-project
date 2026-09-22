@@ -19,7 +19,8 @@ export function EventTypes() {
   return (
     <section
       id="event-types"
-      className="relative isolate w-full overflow-hidden bg-white py-16 lg:py-20"
+      // Figma 341:4324 — 1727 x 914
+      className="relative isolate w-full overflow-hidden bg-white py-16 lg:min-h-[914px] lg:py-20"
     >
       <div
         aria-hidden="true"

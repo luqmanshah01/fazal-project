@@ -55,10 +55,27 @@ export function Stat({ value, label, className }: StatProps) {
     <div ref={ref} className={cn("flex flex-col items-center gap-2", className)}>
       {/*
         Figma 97:587-594: 55.876px on a 62.86px line, tracking -0.0234em, and
-        the whole value (number + suffix) carries one gradient —
-        125deg #000 -> #FF5050 95%, i.e. the shared .text-gradient-stat.
+        the whole value (number + suffix) carries one gradient.
+
+        That gradient is `.text-gradient-stat-dark`
+        (180deg #3A0D0D -> #A02020), NOT the `.text-gradient-stat` that was
+        here. The two are easy to confuse but are not the same mark: `stat` is
+        a 125deg diagonal ending in bright #FF5050, and it belongs to the
+        SERVICE page stat cards (239:1785), where it is measured and verified.
+        The home stats read dark maroon at the top into a muted red at the
+        bottom — vertical, and never reaching the bright coral.
+
+        `.text-gradient-stat-dark` was already sitting in globals.css with no
+        key in ui/GradientText and no call site anywhere. It was measured for
+        this spot and never wired up; the diagonal one stood in for it.
+
+        Confirmed against the client's Figma screenshot (2026-09-22). Re-check
+        the exact stops when 97:506 can be fetched.
+
+        `Stat` is only used by the home About section, so this does not touch
+        the service page.
       */}
-      <span className="text-gradient-stat pt-0.5 align-middle font-sans text-[40px] font-extrabold leading-[1.125] tracking-[-0.0234em] sm:text-[55.88px]">
+      <span className="text-gradient-stat-dark pt-0.5 align-middle font-sans text-[40px] font-extrabold leading-[1.125] tracking-[-0.0234em] sm:text-[55.88px]">
         {shown}
         {suffix}
       </span>

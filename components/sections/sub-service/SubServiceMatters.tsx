@@ -58,7 +58,12 @@ export function SubServiceMatters({
                 {i < steps.length - 1 ? (
                   <span
                     aria-hidden="true"
-                    className="absolute left-[calc(50%+48px)] top-[44px] hidden h-px w-[calc(100%-96px+2rem)] bg-[repeating-linear-gradient(90deg,rgba(0,0,0,0.35)_0_3px,transparent_3px_9px)] after:absolute after:-right-1 after:-top-[4px] after:text-[10px] after:leading-none after:text-black/50 after:content-['▶'] sm:block"
+                    // The circle is 88px, so it ends 44px from the column
+                    // centre — not 48px. And the column gap is `gap-12`
+                    // (3rem) from sm, dropping to `gap-8` (2rem) at lg, so the
+                    // reach has to change with it; a flat `+2rem` left the
+                    // connector 16px short for the whole sm-to-lg range.
+                    className="absolute left-[calc(50%+44px)] top-[44px] hidden h-px w-[calc(100%-88px+3rem)] bg-[repeating-linear-gradient(90deg,rgba(0,0,0,0.35)_0_3px,transparent_3px_9px)] after:absolute after:-right-1 after:-top-[4px] after:text-[10px] after:leading-none after:text-black/50 after:content-['▶'] sm:block lg:w-[calc(100%-88px+2rem)]"
                   />
                 ) : null}
 

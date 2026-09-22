@@ -31,7 +31,7 @@ export function ServiceOverview({
   return (
     <section
       id="service-overview"
-      className="w-full bg-surface-soft py-16 lg:py-20"
+      className={`w-full bg-surface-soft py-16 lg:py-20 ${content.minHeightClass}`}
     >
       <div
         className={`mx-auto grid w-full grid-cols-1 items-start gap-12 px-6 sm:px-8 lg:gap-[20px] lg:px-12 ${content.containerMaxWidthClass} ${content.gridColsClass}`}

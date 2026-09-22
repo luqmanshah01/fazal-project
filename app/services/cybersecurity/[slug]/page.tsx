@@ -104,6 +104,8 @@ export default async function SubServicePage({
           headingMaxWidthClass="max-w-[760px]"
           // Screenshot draws the plus glyph in red here, unlike every other page
           iconClassName="text-brand-red"
+          // Whole page is screenshot-derived — no measured frame height
+          minHeightClass=""
         />
 
         <ServiceCTA content={SUB_SERVICE_CTA} />

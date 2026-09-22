@@ -19,6 +19,13 @@ type ServicesGridProps = {
   ledeMaxWidthClass?: string;
   /** Figma draws chip CTAs on the Cybersecurity cards but not on the MSP ones */
   showChips?: boolean;
+  /**
+   * Figma frame height at the 1727px design width, as an `lg:min-h-*` class.
+   * Cybersecurity (239:1797) measures 1058. The MSP frame has not been fetched
+   * yet, so that page passes "" rather than inheriting a number that was never
+   * measured for it.
+   */
+  minHeightClass?: string;
 };
 
 /**
@@ -88,11 +95,13 @@ export function ServicesGrid({
   headingMaxWidthClass = "max-w-[1330px]",
   ledeMaxWidthClass = "max-w-[1015px]",
   showChips = true,
+  minHeightClass = "lg:min-h-[1058px]",
 }: ServicesGridProps = {}) {
   return (
     <section
       id="services"
-      className="relative isolate w-full overflow-hidden bg-white py-16 lg:py-20"
+      // Figma 239:1797 — 1727 x 1058, H2 at y61
+      className={`relative isolate w-full overflow-hidden bg-white py-16 lg:pb-20 lg:pt-[61px] ${minHeightClass}`}
     >
       {/* Faint mesh — 159 #04102A hairlines under a radial mask, Figma 239:1798 */}
       <div
@@ -100,7 +109,10 @@ export function ServicesGrid({
         className="pointer-events-none absolute inset-0 -z-10 bg-[url('/images/services/services-bg-mask.svg')] bg-cover bg-center opacity-60"
       />
 
-      <Container>
+      {/* Figma 239:1803 — the divider artwork is 1491 wide at x120, so the
+          three columns span 120 -> 1611. 1491 + 96px of `lg` padding = 1587px.
+          The heading and lede keep their own narrower Figma boxes below. */}
+      <Container maxWidthClass="max-w-[1587px]">
         <Reveal>
           <h2
             className={`mx-auto text-center font-sans text-[clamp(2rem,4.1vw,70.75px)] font-extrabold leading-[1.16] tracking-[-0.0316em] text-black ${headingMaxWidthClass}`}

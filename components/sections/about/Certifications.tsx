@@ -19,7 +19,12 @@ import { cn } from "@/lib/utils";
  */
 export function Certifications() {
   return (
-    <section id="certifications" className="w-full bg-white py-16 lg:py-20">
+    /* Figma 239:1585 — 1909 x 937 (the frame overhangs the canvas at x-90;
+       937 is the height) */
+    <section
+      id="certifications"
+      className="w-full bg-white py-16 lg:min-h-[937px] lg:py-20"
+    >
       <Container>
         <Reveal>
           <h2 className="text-center font-sans text-[clamp(2rem,4.1vw,70.75px)] font-extrabold leading-[1.16] tracking-[-0.0316em] text-black">

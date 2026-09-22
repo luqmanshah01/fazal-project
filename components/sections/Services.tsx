@@ -63,7 +63,8 @@ export function Services() {
   return (
     <section
       id="services"
-      className="relative isolate w-full overflow-hidden bg-white pt-2 pb-16 md:pt-4 md:pb-20"
+      // Figma 97:595 — 1727 x 992
+      className="relative isolate w-full overflow-hidden bg-white pt-2 pb-16 md:pt-4 md:pb-20 lg:min-h-[992px]"
     >
       {/* Faint mesh under the whole section — Figma 97:596 */}
       <div
@@ -71,7 +72,9 @@ export function Services() {
         className="pointer-events-none absolute inset-0 -z-10 bg-[url('/images/home/services-bg-mask.svg')] bg-cover bg-center opacity-60"
       />
 
-      <Container>
+      {/* Figma 97:601 — the divider artwork is 1488.14 wide at x120, so the
+          three columns span 120 -> 1608.14. 1488 + 96px of `lg` padding = 1584px. */}
+      <Container maxWidthClass="max-w-[1584px]">
         <SectionHeading
           eyebrow="What We Do"
           titleMaxWidthClass="max-w-[1135px]"

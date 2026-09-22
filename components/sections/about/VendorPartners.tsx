@@ -17,7 +17,11 @@ import { VENDOR_ROWS } from "@/lib/data";
  */
 export function VendorPartners() {
   return (
-    <section id="vendors" className="w-full bg-white py-16 lg:py-20">
+    /* Figma 239:1621 — 1727 x 774 */
+    <section
+      id="vendors"
+      className="w-full bg-white py-16 lg:min-h-[774px] lg:py-20"
+    >
       <Container>
         <Reveal>
           <h2 className="text-center font-sans text-[clamp(1.875rem,3.71vw,64px)] font-extrabold leading-[1.16] tracking-[-0.0159em] text-black">

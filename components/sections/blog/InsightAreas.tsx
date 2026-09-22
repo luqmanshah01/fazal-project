@@ -11,6 +11,12 @@ type InsightAreasProps = {
   /** Blog draws the section on #F9F9F9, Case Studies on white */
   surfaceClass?: string;
   id?: string;
+  /**
+   * Figma frame height at 1727px, as an `lg:min-h-*` class. Blog (341:4503)
+   * measures 751. The Case Studies frame has not been fetched, so that page
+   * passes "".
+   */
+  minHeightClass?: string;
 };
 
 /**
@@ -31,9 +37,14 @@ export function InsightAreas({
   headingMaxWidthClass = "max-w-[863px]",
   surfaceClass = "bg-surface-soft",
   id = "insight-areas",
+  minHeightClass = "lg:min-h-[751px]",
 }: InsightAreasProps = {}) {
   return (
-    <section id={id} className={`w-full py-16 lg:py-20 ${surfaceClass}`}>
+    // Figma 341:4503 — 1747 x 751
+    <section
+      id={id}
+      className={`w-full py-16 lg:py-20 ${surfaceClass} ${minHeightClass}`}
+    >
       {/* Cards span x154.91 -> 1577 = 1422px */}
       <div className="mx-auto w-full max-w-[1422px] px-6 sm:px-8 lg:px-12">
         <Reveal>
