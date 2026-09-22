@@ -49,7 +49,18 @@ export function Navbar() {
             />
           </Link>
 
-          <nav className="hidden items-center lg:flex lg:gap-4 xl:gap-7">
+          {/*
+            Figma 239:1482: the nav group is a row with a 4px gap, and each
+            link carries 8px of padding — so adjacent labels sit 20px apart.
+            Scaling the client's screenshot off the 1267px pill measures
+            19-21px between labels, which agrees.
+
+            `lg:gap-4 xl:gap-7` was giving 32px at lg and 44px at xl. That
+            over-wide group is also what forced the Contact Us button to drop
+            its Figma width below xl; at 4px the whole row fits at 1024 with
+            ~85px to spare, so the button keeps its measured width from lg up.
+          */}
+          <nav className="hidden items-center lg:flex lg:gap-1">
             {NAV_ITEMS.map((item) => {
               const active = isActiveHref(item.href, pathname, item.activePrefix);
               return (
@@ -63,7 +74,11 @@ export function Navbar() {
                     // whitespace-nowrap + shrink-0 stop two-word labels like
                     // "About Us" breaking onto a second line when the row gets
                     // tight between lg and xl.
-                    "group inline-flex min-h-[44px] shrink-0 items-center gap-1.5 whitespace-nowrap rounded-[10px] px-2 text-[15px] tracking-tight transition-colors",
+                    // T22/T23: 16px on 25.6, tracking -0.005em. `text-[15px]`
+                    // and `tracking-tight` (-0.025em) were both off.
+                    // min-h-[44px] stays: Figma's hit area is ~41px, and the
+                    // 44px target is a deliberate, signed-off deviation.
+                    "group inline-flex min-h-[44px] shrink-0 items-center gap-1.5 whitespace-nowrap rounded-[10px] px-2 text-[16px] tracking-[-0.005em] transition-colors",
                     active
                       ? "font-bold text-brand-red"
                       : "font-normal text-white/90 hover:text-white",
@@ -73,7 +88,8 @@ export function Navbar() {
                   {item.hasDropdown ? (
                     <Icon
                       icon="ep:arrow-down-bold"
-                      className="h-3 w-3 transition-transform group-hover:translate-y-0.5"
+                      // Figma draws this at 15 x 12, not 12 x 12
+                      className="h-3 w-[15px] transition-transform group-hover:translate-y-0.5"
                     />
                   ) : null}
                 </Link>
@@ -84,9 +100,23 @@ export function Navbar() {
           <div className="flex items-center gap-3">
             <Link
               href="#contact"
-              // Figma's 219px width is measured at 1727px and crowds the nav at
-              // 1024px, so it only applies from xl up; at lg the button hugs.
-              className="hidden shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-full bg-brand-red px-6 py-3 text-sm font-semibold text-white shadow-btn-inset-sm transition-all hover:brightness-110 lg:inline-flex lg:h-[41px] xl:min-w-[219px]"
+              /*
+                Figma 239:1482: 221.41 x 44, padding 10px 24px, fill #FF5050,
+                border #CC2929 0.8px, radius 100px, label Inter SemiBold 16px
+                (T24 — the one place in the navbar that is not Bricolage).
+
+                Four of those were missing. There was no border at all, even
+                though --color-brand-red-deep was already in globals.css
+                carrying the comment "navbar Contact Us border" — defined and
+                never wired up. The label was Bricolage 14px, and the box was
+                41px tall.
+
+                The width no longer needs to wait for xl: the nav group was
+                over-wide because of its gap (see above), and at the Figma 4px
+                gap the full row fits at 1024px with room to spare. 44px also
+                clears the touch-target floor that 41px did not.
+              */
+              className="hidden shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-full border-[0.8px] border-brand-red-deep bg-brand-red px-6 py-3 font-inter text-[16px] font-semibold text-white shadow-btn-inset-sm transition-all hover:brightness-110 lg:inline-flex lg:h-[44px] lg:min-w-[221.41px]"
             >
               Contact Us
             </Link>
