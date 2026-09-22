@@ -6,7 +6,23 @@ import { TRUST_BADGES } from "@/lib/data";
 
 export function Hero() {
   return (
-    <section className="relative isolate flex min-h-svh w-full items-center overflow-hidden text-white md:min-h-[800px] lg:min-h-[1040px]">
+    /*
+      1040px was here with no source behind it — no spec doc, no node id, no
+      comment. Both heroes that HAVE been measured are 1727 x 919: About
+      (239:1465) and Cybersecurity (239:1694). Same design pattern, same H1
+      size, same button row. 919 is the value with evidence, so it is the one
+      used.
+
+      Caveat for the re-measure: this hero carries a trust-badge row the other
+      two do not, so its frame may genuinely be a little taller. Scaling the
+      client's Figma screenshot off the 1267px navbar pill puts the badges
+      ending near y774, and the two measured heroes leave ~190-210px below
+      their last element, which would put this frame around 975. That is a
+      screenshot estimate with roughly +/-25px of slop, not a measurement —
+      hence 919 rather than a number nobody has read off the file. Confirm
+      against 97:506 when the fetch is possible.
+    */
+    <section className="relative isolate flex min-h-svh w-full items-center overflow-hidden text-white md:min-h-[800px] lg:min-h-[919px]">
       <video
         src="/videos/hero-bg.mp4"
         poster="/images/backgrounds/hero-bg.png"
