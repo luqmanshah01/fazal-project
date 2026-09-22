@@ -22,7 +22,7 @@ export function Hero() {
       hence 919 rather than a number nobody has read off the file. Confirm
       against 97:506 when the fetch is possible.
     */
-    <section className="relative isolate flex min-h-svh w-full items-center overflow-hidden text-white md:min-h-[800px] lg:min-h-[919px]">
+    <section className="relative isolate flex min-h-svh w-full items-center overflow-hidden text-white md:min-h-[800px] lg:min-h-[919px] lg:items-start">
       <video
         src="/videos/hero-bg.mp4"
         poster="/images/backgrounds/hero-bg.png"
@@ -37,7 +37,22 @@ export function Hero() {
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-black/70 via-black/60 to-black/85" />
       <div className="absolute inset-0 -z-10 bg-brand-red/10 mix-blend-multiply" />
 
-      <div className="mx-auto flex w-full max-w-[1440px] flex-col items-center px-6 pt-32 pb-20 text-center sm:pt-40 sm:pb-24 lg:py-32">
+      {/*
+        Figma does not centre this content in the frame — it pushes it down.
+        The eyebrow pill sits at y317 on the 919px frame, leaving a deliberate
+        block of empty black between the navbar (which ends at y142) and the
+        pill. `items-center` + `lg:py-32` was centring it instead, landing the
+        pill near y213 — about 104px too high — and dumping the slack at the
+        bottom. That is what made the hero read wrong against the design.
+
+        The two measured heroes do the same thing: About (239:1465) puts its
+        pill at y308, Cybersecurity (239:1694) at y307. All three are
+        top-aligned from lg now.
+
+        317 / 1727 = 18.35vw, the project's standard conversion, so the offset
+        shrinks with the viewport instead of stranding the content at 1024px.
+      */}
+      <div className="mx-auto flex w-full max-w-[1440px] flex-col items-center px-6 pt-32 pb-20 text-center sm:pt-40 sm:pb-24 lg:pb-16 lg:pt-[clamp(8rem,18.35vw,317px)]">
         {/* 331.67 x 25.61 pill, fill rgba(255,80,80,.1), border rgba(255,80,80,.3) */}
         <Reveal>
           <span className="inline-flex items-center rounded-full border border-brand-red/30 bg-brand-red-soft px-5 py-1 text-[12.81px] tracking-tight text-white backdrop-blur-sm">

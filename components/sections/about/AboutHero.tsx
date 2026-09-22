@@ -13,7 +13,7 @@ export function AboutHero() {
   return (
     <section
       id="about-hero"
-      className="relative isolate flex min-h-svh w-full items-center overflow-hidden bg-black text-white md:min-h-[800px] lg:min-h-[919px]"
+      className="relative isolate flex min-h-svh w-full items-center overflow-hidden bg-black text-white md:min-h-[800px] lg:min-h-[919px] lg:items-start"
     >
       {/* Ambient glow — 1019.82px ellipse, #7A1717, blur(150.27px) */}
       <div
@@ -21,7 +21,10 @@ export function AboutHero() {
         className="pointer-events-none absolute left-1/2 top-1/2 -z-10 aspect-square w-[59vw] max-w-[1020px] -translate-x-1/2 -translate-y-[15%] rounded-full bg-hero-glow opacity-90 blur-[100px] lg:blur-[150px]"
       />
 
-      <div className="mx-auto flex w-full max-w-[1440px] flex-col items-center px-6 pt-32 pb-20 text-center sm:pt-40 sm:pb-24 lg:py-32">
+      {/* Figma 239:1465 puts the eyebrow pill at y308 on the 919px frame, not
+          centred — `items-center` + `lg:py-32` was floating it ~100px high.
+          308 / 1727 = 17.84vw. */}
+      <div className="mx-auto flex w-full max-w-[1440px] flex-col items-center px-6 pt-32 pb-20 text-center sm:pt-40 sm:pb-24 lg:pb-16 lg:pt-[clamp(8rem,17.84vw,308px)]">
         <Reveal>
           <span className="inline-flex items-center rounded-full border border-brand-red/30 bg-brand-red-soft px-5 py-1 text-[12.81px] tracking-tight text-white">
             {ABOUT_HERO.eyebrow}
