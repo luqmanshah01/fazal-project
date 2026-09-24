@@ -24,22 +24,36 @@ import type {
 export const NAV_ITEMS: NavItem[] = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/about" },
-  // No submenu design exists anywhere in the Figma file, so the arrow stays
-  // decorative and the item links at the first service page. `activePrefix`
-  // keeps it lit on every /services/* route, as Figma draws it.
+  // The Figma file draws the caret but no submenu panel behind it, so the
+  // panel's styling is derived from the navbar pill rather than measured.
+  // The item still links at the first service page for no-hover/no-JS use.
+  // `activePrefix` keeps it lit on every /services/* route, as Figma draws it.
   {
     label: "Services",
     href: "/services/cybersecurity",
     hasDropdown: true,
     activePrefix: "/services",
+    children: [
+      { label: "Cybersecurity", href: "/services/cybersecurity" },
+      { label: "IT Infrastructure", href: "/services/it-infrastructure" },
+      {
+        label: "Managed Service Provider",
+        href: "/services/managed-service-provider",
+      },
+    ],
   },
   // Figma draws "Resources" active on the Case Studies frame (341:4000), so
-  // the Resources group covers those routes. No submenu design exists.
+  // the Resources group covers those routes. As with Services, the caret is
+  // drawn but the panel behind it is not, so its styling is derived.
   {
     label: "Resources",
     href: "/case-studies",
     hasDropdown: true,
     activePrefix: ["/case-studies", "/events"],
+    children: [
+      { label: "Case Studies", href: "/case-studies" },
+      { label: "Events", href: "/events" },
+    ],
   },
   { label: "Blogs", href: "/blog" },
 ];

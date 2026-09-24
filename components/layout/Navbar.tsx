@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Icon } from "@iconify/react";
 import { NAV_ITEMS } from "@/lib/data";
 import { cn } from "@/lib/utils";
@@ -27,7 +27,39 @@ function isActiveHref(
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
+  // Label of the nav item whose submenu is open, or null. One at a time.
+  const [openMenu, setOpenMenu] = useState<string | null>(null);
   const pathname = usePathname();
+
+  // Closing on a short delay rather than immediately: the panel sits below the
+  // link with a gap, and the pointer travels across that gap diagonally. An
+  // instant close makes the menu unreachable.
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  function cancelClose() {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    closeTimer.current = null;
+  }
+
+  function openSubmenu(label: string) {
+    cancelClose();
+    setOpenMenu(label);
+  }
+
+  function closeSubmenuSoon() {
+    cancelClose();
+    closeTimer.current = setTimeout(() => setOpenMenu(null), 180);
+  }
+
+  useEffect(() => cancelClose, []);
+
+  // A same-route link click leaves the panel open over the new page otherwise,
+  // because the pointer never leaves it.
+  useEffect(() => {
+    cancelClose();
+    setOpenMenu(null);
+    setOpen(false);
+  }, [pathname]);
 
   return (
     <header className="absolute inset-x-0 top-0 z-50 pt-6 md:pt-10 lg:pt-[60px]">
@@ -63,11 +95,14 @@ export function Navbar() {
           <nav className="hidden items-center lg:flex lg:gap-1">
             {NAV_ITEMS.map((item) => {
               const active = isActiveHref(item.href, pathname, item.activePrefix);
-              return (
+              const submenuOpen = Boolean(item.children) && openMenu === item.label;
+              const link = (
                 <Link
                   key={item.label}
                   href={item.href}
                   aria-current={active ? "page" : undefined}
+                  aria-haspopup={item.children ? "true" : undefined}
+                  aria-expanded={item.children ? submenuOpen : undefined}
                   className={cn(
                     // px-2 matches the 8px padding in Figma; min-h-[44px] is an
                     // accessibility deviation from the design's 41.6px hit area.
@@ -88,11 +123,85 @@ export function Navbar() {
                   {item.hasDropdown ? (
                     <Icon
                       icon="ep:arrow-down-bold"
-                      // Figma draws this at 15 x 12, not 12 x 12
-                      className="h-3 w-[15px] transition-transform group-hover:translate-y-0.5"
+                      className={cn(
+                        // Figma draws this at 15 x 12, not 12 x 12
+                        "h-3 w-[15px] transition-transform",
+                        submenuOpen
+                          ? "rotate-180"
+                          : "group-hover:translate-y-0.5",
+                      )}
                     />
                   ) : null}
                 </Link>
+              );
+
+              if (!item.children) return link;
+
+              return (
+                <div
+                  key={item.label}
+                  className="relative"
+                  onMouseEnter={() => openSubmenu(item.label)}
+                  onMouseLeave={closeSubmenuSoon}
+                  onFocus={() => openSubmenu(item.label)}
+                  onBlur={(e) => {
+                    // Only close once focus has left the trigger *and* the
+                    // panel — tabbing from the trigger into its own links
+                    // fires blur on the trigger.
+                    if (!e.currentTarget.contains(e.relatedTarget)) {
+                      cancelClose();
+                      setOpenMenu(null);
+                    }
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Escape") {
+                      cancelClose();
+                      setOpenMenu(null);
+                    }
+                  }}
+                >
+                  {link}
+
+                  {/*
+                    No Figma design exists for this panel, so it borrows the
+                    pill's own treatment: same border colour, same blurred
+                    black fill, same 16px label.
+
+                    The gap under the trigger is `pt-3` on the wrapper, not a
+                    margin — padding keeps the pointer inside the element while
+                    it travels down, so the menu does not close mid-move.
+                  */}
+                  <div
+                    inert={!submenuOpen}
+                    className={cn(
+                      "absolute left-0 top-full z-10 pt-3 transition-all duration-200",
+                      submenuOpen
+                        ? "translate-y-0 opacity-100"
+                        : "pointer-events-none -translate-y-1 opacity-0",
+                    )}
+                  >
+                    <div className="flex min-w-[260px] flex-col gap-1 rounded-2xl border border-brand-red/50 bg-black/90 p-2 backdrop-blur-md">
+                      {item.children.map((child) => {
+                        const childActive = pathname === child.href;
+                        return (
+                          <Link
+                            key={child.href}
+                            href={child.href}
+                            aria-current={childActive ? "page" : undefined}
+                            className={cn(
+                              "whitespace-nowrap rounded-xl px-4 py-2.5 text-[16px] tracking-[-0.005em] transition-colors",
+                              childActive
+                                ? "bg-brand-red-soft font-bold text-brand-red"
+                                : "font-normal text-white/90 hover:bg-white/10 hover:text-white",
+                            )}
+                          >
+                            {child.label}
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
               );
             })}
           </nav>
@@ -146,27 +255,59 @@ export function Navbar() {
           inert={!open}
           className={cn(
             "mt-3 overflow-hidden rounded-2xl border border-white/15 bg-black/85 backdrop-blur-lg transition-all duration-300 lg:hidden",
-            open ? "max-h-[500px] py-4 opacity-100" : "max-h-0 py-0 opacity-0",
+            // 500px clipped the list once the Services and Resources submenus
+            // were nested in — five extra rows.
+            open ? "max-h-[720px] py-4 opacity-100" : "max-h-0 py-0 opacity-0",
           )}
         >
           <nav className="flex flex-col gap-1 px-4">
             {NAV_ITEMS.map((item) => {
               const active = isActiveHref(item.href, pathname, item.activePrefix);
               return (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  onClick={() => setOpen(false)}
-                  aria-current={active ? "page" : undefined}
-                  className={cn(
-                    "rounded-lg px-3 py-3 text-base transition-colors",
-                    active
-                      ? "font-bold text-brand-red"
-                      : "text-white/90 hover:bg-white/5",
-                  )}
-                >
-                  {item.label}
-                </Link>
+                <div key={item.label} className="flex flex-col">
+                  <Link
+                    href={item.href}
+                    onClick={() => setOpen(false)}
+                    aria-current={active ? "page" : undefined}
+                    className={cn(
+                      "rounded-lg px-3 py-3 text-base transition-colors",
+                      active
+                        ? "font-bold text-brand-red"
+                        : "text-white/90 hover:bg-white/5",
+                    )}
+                  >
+                    {item.label}
+                  </Link>
+
+                  {/*
+                    There is no hover on touch, so the submenu is listed inline
+                    rather than hidden behind an interaction. Indented under a
+                    rule so the two levels stay readable.
+                  */}
+                  {item.children ? (
+                    <div className="ml-3 flex flex-col border-l border-white/15 pl-2">
+                      {item.children.map((child) => {
+                        const childActive = pathname === child.href;
+                        return (
+                          <Link
+                            key={child.href}
+                            href={child.href}
+                            onClick={() => setOpen(false)}
+                            aria-current={childActive ? "page" : undefined}
+                            className={cn(
+                              "rounded-lg px-3 py-2.5 text-sm transition-colors",
+                              childActive
+                                ? "font-bold text-brand-red"
+                                : "text-white/70 hover:bg-white/5 hover:text-white",
+                            )}
+                          >
+                            {child.label}
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  ) : null}
+                </div>
               );
             })}
             <Link

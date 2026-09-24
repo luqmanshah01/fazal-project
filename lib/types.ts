@@ -1,7 +1,19 @@
+export type NavChild = {
+  label: string;
+  href: string;
+};
+
 export type NavItem = {
   label: string;
   href: string;
+  /** Draws the caret. Set independently of `children`: Figma gives "Resources"
+   *  a caret but no submenu behind it. */
   hasDropdown?: boolean;
+  /**
+   * Submenu entries. When present, the navbar opens a panel on hover (and on
+   * focus, for keyboard) instead of leaving the caret decorative.
+   */
+  children?: NavChild[];
   /**
    * Route prefix(es) that mark this item active, when that is broader than
    * `href`. "Services" links at one service page but stays active across all
