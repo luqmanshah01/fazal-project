@@ -86,12 +86,36 @@ export function ServiceHero({
         </Reveal>
 
         <Reveal delay={0.3}>
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-4 lg:gap-[28.08px]">
+          {/*
+            The filled emphasis SWAPS between the two buttons, the same
+            behaviour as about/AboutHero. At rest the primary is solid red and
+            the secondary is an outline; hovering the outline moves the fill to
+            it and drops the primary back to an outline. Hovering the primary
+            changes nothing, since it is already the filled one.
+
+            NOT FROM FIGMA — the file has no interaction data anywhere: 731
+            nodes carry an `interactions` array and every one is empty, and
+            both `prototypeStartNodeID` values are null. Specified by the user.
+
+            `group-has-*` keeps this a Server Component, and it is also the
+            only safe way to express it. The generated selector is
+            `.group:has(.cta-ghost:hover) .btn`, which outranks the variant's
+            own `.btn:hover` on specificity. A plain `hover:bg-brand-red`
+            would NOT be safe: `ghostRed` already defines
+            `hover:bg-brand-red/10`, and two utilities setting one property
+            under the same variant resolve by Tailwind's internal order rather
+            than the order written here — the same trap `cn()` has, documented
+            in ui/Container.
+
+            Border width stays at the primary's 2.35px through the swap;
+            matching ghostRed's 1.71px would shift the row by ~1.3px on hover.
+          */}
+          <div className="group mt-10 flex flex-wrap items-center justify-center gap-4 lg:gap-[28.08px]">
             <Button
               href={content.primaryHref}
               variant="primary"
               size="md"
-              className={`min-w-[260px] lg:h-[48px] lg:px-[36.34px] lg:text-[21.88px] ${content.primaryWidthClass ?? ""}`}
+              className={`min-w-[260px] group-has-[.cta-ghost:hover]:border-brand-red group-has-[.cta-ghost:hover]:bg-transparent group-has-[.cta-ghost:hover]:shadow-none lg:h-[48px] lg:px-[36.34px] lg:text-[21.88px] ${content.primaryWidthClass ?? ""}`}
             >
               {content.primaryCta}
             </Button>
@@ -99,7 +123,7 @@ export function ServiceHero({
               href={content.secondaryHref}
               variant="ghostRed"
               size="md"
-              className={`min-w-[260px] lg:h-[48px] lg:px-[36.34px] lg:text-[21.88px] ${content.secondaryWidthClass}`}
+              className={`cta-ghost min-w-[260px] group-has-[.cta-ghost:hover]:bg-brand-red group-has-[.cta-ghost:hover]:shadow-btn-inset lg:h-[48px] lg:px-[36.34px] lg:text-[21.88px] ${content.secondaryWidthClass}`}
             >
               {content.secondaryCta}
             </Button>

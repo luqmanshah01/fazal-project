@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { GradientText } from "@/components/ui/GradientText";
 import { Reveal } from "@/components/ui/Reveal";
-import { MISSION_VISION } from "@/lib/data";
+import { ABOUT_STORY, MISSION_VISION } from "@/lib/data";
 
 /**
  * Mission & Vision — Figma node 239:1548 (1607 x 733).
@@ -43,7 +43,10 @@ export function MissionVision() {
             keeps the alignment at any width instead of only at 1727px.
           */}
           <Reveal delay={0.1} className="lg:h-full">
-            <div className="relative aspect-[792.94/494.95] w-full overflow-hidden rounded-[25.69px] lg:aspect-auto lg:h-full">
+            {/* `isolate` keeps the blend below contained — without it the
+                multiply would reach past the card and mix with the white
+                section behind it. */}
+            <div className="relative isolate aspect-[792.94/494.95] w-full overflow-hidden rounded-[25.69px] lg:aspect-auto lg:h-full">
               <Image
                 src="/images/about/mission.png"
                 alt="SV Tech security operations team at work"
@@ -52,19 +55,58 @@ export function MissionVision() {
                 className="object-cover"
               />
               {/*
-                Figma's topmost fill on this rectangle, verbatim:
-                linear-gradient(0deg, rgba(0,0,0,1) 6%, rgba(0,0,0,0) 45%).
+                MEASURED from 425:4016 "Rectangle 799" (792.94 x 494.95,
+                radius 25.689). Figma stacks three fills, bottom to top:
 
-                It also reports a solid #FF5050 fill between this gradient and
-                the photo, with no opacity or blend mode. Rendered literally
-                that would hide the photo completely, so it is almost certainly
-                a disabled layer that the API still lists. Omitted pending
-                confirmation — see SKILL.md 9.
+                  [0] IMAGE  e4b12491…  NORMAL, opacity 1
+                  [1] SOLID  #FF5050    blendMode HUE, opacity 1
+                  [2] GRADIENT_LINEAR   NORMAL, black -> transparent
+
+                The #FF5050 was previously omitted, on the reasoning that an
+                opaque fill would hide the photo and was therefore a disabled
+                layer the API still listed (SKILL.md 9). It is not disabled —
+                it is a HUE blend, which takes only the hue from the red and
+                keeps the photo's own saturation and luminosity. That is why
+                the monitors, which are GREEN in the source asset, render red
+                in the design while the image stays legible.
+
+                `multiply` was tried first and is wrong: it crushes the green
+                channel and turns the monitors amber rather than red.
+
+                The imageRef matches the asset already in the repo byte for
+                byte (md5 6c1944d50bf5f255bc7234884c20d62a), so no new export
+                is needed.
               */}
+              <div
+                aria-hidden="true"
+                className="absolute inset-0 bg-brand-red mix-blend-hue"
+              />
+              {/* Handles (0.5, 0.9394) -> (0.5, 0.5528), straight up, black to
+                  transparent — i.e. 6.06% to 44.72% measured from the bottom,
+                  which is the 6%/45% already written here. Unchanged. */}
               <div
                 aria-hidden="true"
                 className="absolute inset-0 bg-[linear-gradient(0deg,rgba(0,0,0,1)_6%,rgba(0,0,0,0)_45%)]"
               />
+
+              {/*
+                "Our Story" — Figma 425:4024, white type over the photo. This
+                is what the gradient above is for.
+
+                Positions are percentages of the photo box (792.94 x 494.95) so
+                the block tracks the image at any width:
+                  left   53.09 / 792.94 = 6.7%
+                  width  685.9 / 792.94 = 86.5%
+                  bottom 29.69 / 494.95 = 6%
+              */}
+              <div className="absolute bottom-[6%] left-[6.7%] w-[86.5%]">
+                <h3 className="font-sans text-[clamp(1.25rem,2.1vw,36.29px)] font-extrabold leading-tight text-white">
+                  {ABOUT_STORY.label}
+                </h3>
+                <p className="mt-2 text-[clamp(0.8125rem,1.16vw,19.96px)] leading-[1.2] tracking-[-0.0429em] text-white/70">
+                  {ABOUT_STORY.body}
+                </p>
+              </div>
             </div>
           </Reveal>
 

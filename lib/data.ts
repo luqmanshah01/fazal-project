@@ -5,6 +5,7 @@ import type {
   BlogPost,
   Milestone,
   Certification,
+  CoreValue,
   Principle,
   ValueStatement,
   ThreatStat,
@@ -250,14 +251,59 @@ export const FOOTER_LINKS = {
 /* "parachuting in we are"). Left as-is pending designer confirmation. */
 /* ------------------------------------------------------------------ */
 
+/**
+ * ⚠️ REDESIGNED HERO — Figma node `425:3930`, the CURRENT "About Us" frame.
+ *
+ * The rest of this page still comes from `239:1464`, the frame the build was
+ * originally made against. `239:1464` is 5928px tall, `425:3930` is 5373px, so
+ * roughly 555px of the page changed and the other six sections have NOT been
+ * compared yet.
+ *
+ * Note the positioning shift this carries: the old hero opened with "premier
+ * enterprise cybersecurity & IT solutions company"; the new one leads with
+ * "a leading IT infrastructure company". That may run through the whole page.
+ *
+ * COPY below is transcribed from a client screenshot and should be exact.
+ * GEOMETRY in the component is ESTIMATED off the same screenshot — the Figma
+ * API was rate-limited. Scale reference: the navbar pill is a measured 1267px
+ * and renders 538px in the shot, so design_px = screenshot_px / 0.422.
+ *
+ * "\n" in headingMiddle is a hard line break, same convention as
+ * ServiceHeroContent.
+ */
 export const ABOUT_HERO = {
   eyebrow: "Who We Are",
-  headingStart: "Pakistan's",
-  headingMiddle: "Most Trusted Cybersecurity & IT Solutions Company",
-  headingEnd: "Since 2017",
-  lede: "SV Tech is Pakistan's premier enterprise cybersecurity & IT solutions company, headquartered in Rawalpindi. Founded in 2017, we have spent 8+ years building a reputation for world-class security expertise, trusted by Pakistan's leading enterprises across energy, finance, telecom, and manufacturing.",
-  primaryCta: "Get a Free Security Audit",
+  headingStart: "Powering",
+  headingMiddle: "Pakistan's Enterprises With\nGlobal-Grade IT",
+  headingEnd: "Infrastructures",
+  lede: "SV Tech is a leading IT infrastructure company in Pakistan, delivering managed IT services, cybersecurity solutions, and digital transformation to enterprises across the country. We help organizations operate securely, scale efficiently, and modernize their technology with confidence.",
+  primaryCta: "Get Started",
   secondaryCta: "View Our Services",
+} as const;
+
+/**
+ * "Our Story" — Figma 425:4024, MEASURED.
+ *
+ * Not a third card. It is white type laid over the BOTTOM of the photo, which
+ * is what the photo's black-to-transparent gradient fill exists to support:
+ *
+ *   heading  425:4025  @(86.49, 554.03)  685.9 x 27.69   Bricolage 800 36.29px/60.42  #FFFFFF
+ *   body     425:4026  @(86.49, 595.42)  685.9 x 69.36   Bricolage 400 19.96px/23.95  #FFFFFF @ .7
+ *
+ * The photo itself is 425:4016 @(33.4, 199.52) 792.94 x 494.95, so the block
+ * sits 53.09px in from its left edge and ends 29.69px above its bottom.
+ *
+ * ⚠️ The body is BYTE-IDENTICAL to MISSION_VISION[0].body below. Figma has the
+ * Mission paragraph pasted under the "Our Story" heading — almost certainly a
+ * copy-paste slip, since a story and a mission are not the same statement.
+ * Reproduced as drawn; replace this string once the real copy exists.
+ *
+ * Figma stores the heading as "Our Story " with a trailing space. Trimmed,
+ * same as the PRINCIPLES "Local Commitment\n" case.
+ */
+export const ABOUT_STORY = {
+  label: "Our Story",
+  body: "To empower Pakistan's enterprises with enterprise-grade cybersecurity solutions, managed IT infrastructure, and digital transformation strategies built on global standards, delivered with local understanding.",
 } as const;
 
 export const MISSION_VISION: ValueStatement[] = [
@@ -341,6 +387,117 @@ export const PRINCIPLES: Principle[] = [
     title: "Local Commitment",
     description:
       "We are not a global firm parachuting in we are a Pakistani company with deep roots, long-term relationships, and a genuine stake in Pakistan's digital future.",
+  },
+];
+
+/* ------------------------------------------------------------------ */
+/* About page redesign — Figma 425:3930.                               */
+/*                                                                     */
+/* Two sections below are NEW and three from the old frame (239:1464)  */
+/* are gone from the design: Timeline, Certifications and Principles.  */
+/* Their copy is kept above — MILESTONES, CERTIFICATIONS, PRINCIPLES — */
+/* and their components are still on disk; they are simply no longer   */
+/* wired into app/about/page.tsx. This repo has no git history, so      */
+/* nothing is deleted.                                                 */
+/* ------------------------------------------------------------------ */
+
+/**
+ * "Our Core Values" — Figma node 425:4103 (1648 x 936, white), MEASURED.
+ *
+ * Six cards, 459 x 261 at radius 27.66 on #F8F8F8, columns at x113/595/1077
+ * (23px gutter) and rows at y272/593 (60px gutter). Each card carries a 1px
+ * INSIDE stroke on a 155.37deg #FF5050 -> #F5F5F5 gradient and a HARD drop
+ * shadow — blur radius 0, offset (2,3), solid #FF5050.
+ *
+ * Reading order is across, so the array runs row 1 then row 2.
+ *
+ * ⚠️ Figma sets the "Innovation" body at 18px/21.6 and the other five at
+ * 16.6px/19.92. Rendered at one size here — 16.6px, the value five of the six
+ * agree on. Flagged rather than silently kept, since a lone 1.4px outlier in
+ * an otherwise uniform grid reads as a design slip.
+ *
+ * "Integrity" is stored as " Integrity" with a leading space; trimmed.
+ */
+export const CORE_VALUES_HEADING = {
+  start: "Our",
+  middle: "Core Values; What Drives Our IT Infrastructure and Cybersecurity Services in",
+  end: "Pakistan",
+} as const;
+
+export const CORE_VALUES: CoreValue[] = [
+  {
+    title: "Innovation",
+    description:
+      "SV Tech pioneers advancements in cloud infrastructure, IT operations automation, and infrastructure modernization, helping Pakistani enterprises stay ahead of evolving technology demands.",
+  },
+  {
+    title: "Excellence",
+    description:
+      "SV Tech delivers IT infrastructure outsourcing and managed cybersecurity services with precision and consistency, ensuring reliable outcomes on every engagement across Pakistan.",
+  },
+  {
+    title: "Customer Focus",
+    description:
+      "SV Tech provides tailored managed IT services, including IT infrastructure consulting and remote IT support, designed around the specific needs of each enterprise we serve.",
+  },
+  {
+    title: "Integrity",
+    description:
+      "SV Tech delivers IT infrastructure services in Pakistan with complete transparency, building honest, accountable partnerships at every stage of the engagement.",
+  },
+  {
+    title: "Collaboration",
+    description:
+      "SV Tech partners closely with organizations to deliver infrastructure assessments, cloud migration, and cybersecurity consulting as an extension of their internal teams.",
+  },
+  {
+    title: "Security",
+    description:
+      "SV Tech embeds proactive cyber risk management, endpoint protection, and network security into every layer of the IT infrastructure we manage.",
+  },
+];
+
+/**
+ * "Why Choose SV Tech" — Figma node 425:4074 (1727 x 1260, white), MEASURED.
+ *
+ * Structurally the old Principles section with a lede added: the same
+ * 357.55 x 27.61 "Why SV Tech" pill, the same 64px centred H2, the same 2 x 2
+ * block grid on a 94px column / 97px row gutter, and the same 5px x 174px
+ * #FF5050 accent rule on each block's left edge. Its two gradient words even
+ * measure identically to the old ones (redBlack33 / blackRed83), so
+ * `Principles` is reused with content passed in rather than duplicated.
+ *
+ * Figma stores the fourth title as "Ongoing Support, Beyond Deployment\n" with
+ * a trailing newline; trimmed, same as PRINCIPLES "Local Commitment\n".
+ */
+export const WHY_CHOOSE_HEADING = {
+  eyebrow: "Why SV Tech",
+  start: "Why Choose",
+  middle: "SV Tech IT Infrastructure and Cybersecurity Company in",
+  end: "Pakistan",
+  lede: "How to choose the best IT infrastructure and cybersecurity company in Pakistan? The best companies are defined by three qualities: global experience, certified expertise, and local market understanding. SV Tech brings all three to Pakistan's enterprise market, delivering IT infrastructure and cybersecurity under one accountable partner.",
+} as const;
+
+export const WHY_CHOOSE_SV_TECH: Principle[] = [
+  {
+    title: "Global Delivery Experience",
+    description:
+      "SV Tech's expertise was built serving international clients since 2017, bringing practices most local providers in Pakistan haven't yet adopted.",
+  },
+  {
+    title: "Certified Expertise",
+    description:
+      "Our engineers hold certifications across IT infrastructure, cloud, and cybersecurity, ensuring every engagement meets enterprise-grade standards.",
+  },
+  {
+    title: "Local Market Understanding",
+    description:
+      "We understand how Pakistani enterprises operate, from regulatory requirements to on-ground infrastructure challenges across key sectors.",
+  },
+  {
+    title: "Ongoing Support, Beyond Deployment",
+    description:
+      "Our partnership doesn't end at go-live. SV Tech stays connected through 24/7 monitoring and continued support as your business grows.",
   },
 ];
 
@@ -1277,10 +1434,33 @@ export const MSP_OVERVIEW: ServiceOverviewContent = {
   bodyMaxWidthClass: "max-w-[768px]",
   bodyMarginClass: "lg:mt-[35px]",
   checklistMaxWidthClass: "max-w-[666px]",
-  // 562 x 524, no border or radius, with an rgba(255,80,80,.8) wash on top.
+  // 562 x 524, with an rgba(255,80,80,.8) wash on top.
   imageAspectClass: "aspect-[562/524]",
-  imageFrameClass: "",
-  imageOverlayClass: "bg-[rgba(255,80,80,0.8)] mix-blend-multiply",
+  /**
+   * ⚠️ CORRECTED FROM A CLIENT SCREENSHOT (2026-09-24). This was recorded as
+   * "no border or radius", but the screenshot of 425:4124 shows all four
+   * corners clearly rounded. Scaling off the photo's known 562px width, the
+   * corner measures ~32px in the shot; 35px is used because that is the
+   * measured radius on the sibling IT Infrastructure frame (341:3682), and
+   * the two are within measurement error of each other. Re-check against the
+   * node when the API is reachable again.
+   */
+  imageFrameClass: "rounded-[35px]",
+  /**
+   * blendMode HUE, not multiply.
+   *
+   * The source asset is a BLUE-AND-GREEN photo; the design renders it red.
+   * Both candidates were composited against the real asset and compared with
+   * the screenshot: `multiply` leaves Pakistan's map outline green and pushes
+   * the sky purple, while `hue` turns the map, sky, cloud and monitors red
+   * exactly as drawn. HUE keeps the photo's own saturation and luminosity and
+   * only replaces the hue, which is why detail survives.
+   *
+   * This is the same correction already applied to about/MissionVision, where
+   * the Figma API confirmed blendMode HUE on the equivalent fill — so it is
+   * the design system's pattern for a red photo wash, not a one-off.
+   */
+  imageOverlayClass: "bg-[rgba(255,80,80,0.8)] mix-blend-hue",
   // Figma 425:4216 — 1727 x 628
   minHeightClass: "lg:min-h-[628px]",
 };

@@ -86,8 +86,11 @@ export function ServiceOverview({
         </div>
 
         <Reveal delay={0.15}>
+          {/* `isolate` contains the overlay's blend mode. Without it a
+              mix-blend-* layer composites against whatever sits behind the
+              card — here the #F9F9F9 section — instead of the photo. */}
           <div
-            className={`relative w-full overflow-hidden ${content.imageAspectClass} ${content.imageFrameClass}`}
+            className={`relative isolate w-full overflow-hidden ${content.imageAspectClass} ${content.imageFrameClass}`}
           >
             <Image
               src={content.image.src}

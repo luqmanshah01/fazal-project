@@ -10,15 +10,14 @@ export function CTABanner() {
         alt=""
         fill
         sizes="100vw"
-        className="-z-20 object-cover object-center opacity-40"
+        className="-z-20 object-cover object-center"
       />
-      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-black/90 via-black/60 to-black/90" />
 
       {/* Figma 97:635 — 701 x 362 #FF5050 ellipse at blur(150px), bleeding in
           from the left edge at (-351, -15), not centred. */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -left-[351px] top-0 -z-10 h-[362px] w-[701px] rounded-full bg-brand-red blur-[150px] animate-ambient-pulse"
+        className="pointer-events-none absolute -left-[351px] -top-[15px] -z-10 h-[362px] w-[701px] rounded-full bg-brand-red blur-[150px] animate-ambient-pulse"
       />
 
       <div className="mx-auto flex w-full max-w-[1450px] flex-col items-center gap-10 px-6 py-20 text-center md:flex-row md:justify-between md:py-24 md:text-left">

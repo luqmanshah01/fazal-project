@@ -63,6 +63,17 @@ export type Principle = {
   description: string;
 };
 
+/**
+ * About page redesign — "Our Core Values", Figma 425:4103.
+ *
+ * Six cards in a 3 x 2 grid. Card title is #FF5050, not black, which is what
+ * separates these from `Principle` above.
+ */
+export type CoreValue = {
+  title: string;
+  description: string;
+};
+
 export type ValueStatement = {
   /** "Mission" or "Vision" */
   label: string;

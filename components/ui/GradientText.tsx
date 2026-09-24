@@ -20,6 +20,10 @@ type Gradient =
   | "blackRed57"
   | "redBlack33"
   | "blackRed83"
+  // About page redesign — Figma 425:3930. Only "Our Core Values" needed new
+  // stops; its other two headings measure identically to the keys above.
+  | "valuesStart"
+  | "valuesEnd"
   // Service page — again per-section, again not interchangeable
   | "svcHeroStart"
   | "svcHeroEnd"
@@ -93,6 +97,8 @@ const GRADIENTS: Record<Gradient, string> = {
   blackRed57: "text-gradient-black-red-57",
   redBlack33: "text-gradient-red-black-33",
   blackRed83: "text-gradient-black-red-83",
+  valuesStart: "text-gradient-values-start",
+  valuesEnd: "text-gradient-values-end",
   svcHeroStart: "text-gradient-svc-hero-start",
   svcHeroEnd: "text-gradient-svc-hero-end",
   redBlack41: "text-gradient-red-black-41",

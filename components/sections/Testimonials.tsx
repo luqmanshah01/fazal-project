@@ -29,22 +29,34 @@ import { TESTIMONIALS } from "@/lib/data";
  * Interaction is NOT from Figma — the file specifies none. Arrows, dots and
  * swipe are derived from the repo's existing patterns.
  */
+/**
+ * Figma 97:695 draws the MIDDLE card as the active one, with both neighbours
+ * bleeding off the frame edges (487px of each 694px card is visible at the
+ * 1728px design width). The carousel used to rest on index 0, which centres
+ * the FIRST card and leaves the whole left half of the band empty — the
+ * single biggest reason this section did not read like the design on load.
+ */
+const INITIAL_INDEX = Math.floor(TESTIMONIALS.length / 2);
+
 export function Testimonials() {
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState(INITIAL_INDEX);
   const total = TESTIMONIALS.length;
 
   const trackRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  const goTo = useCallback((index: number) => {
-    const track = trackRef.current;
-    const card = cardRefs.current[index];
-    if (!track || !card) return;
-    track.scrollTo({
-      left: card.offsetLeft - (track.clientWidth - card.clientWidth) / 2,
-      behavior: "smooth",
-    });
-  }, []);
+  const goTo = useCallback(
+    (index: number, behavior: ScrollBehavior = "smooth") => {
+      const track = trackRef.current;
+      const card = cardRefs.current[index];
+      if (!track || !card) return;
+      track.scrollTo({
+        left: card.offsetLeft - (track.clientWidth - card.clientWidth) / 2,
+        behavior,
+      });
+    },
+    [],
+  );
 
   // Derive the active card from scroll position so swipe, arrows, dots and a
   // trackpad all stay in sync.
@@ -65,9 +77,12 @@ export function Testimonials() {
     setActive(nearest);
   }, []);
 
+  // Rest on the middle card, instantly — a smooth scroll here would animate
+  // the band sideways on every page load. The scroll fires `syncActive`, so
+  // `active` lands on the same index the state already initialised to.
   useEffect(() => {
-    syncActive();
-  }, [syncActive]);
+    goTo(INITIAL_INDEX, "instant");
+  }, [goTo]);
 
   return (
     /*
@@ -178,7 +193,11 @@ function TestimonialCard({ testimonial, active }: CardProps) {
       className={`h-full rounded-[20px] border-2 bg-ink-50 p-6 text-center transition-all duration-500 sm:p-10 md:px-[73px] md:py-10 ${
         active
           ? "border-brand-red opacity-100 shadow-card"
-          : "border-brand-red/30 opacity-70"
+          : // ESTIMATED from .figma-refs/09-testimonials.png, not measured —
+            // 97:695 could not be fetched (API rate-limited). In that export
+            // the neighbours are ghosted well past the 70% that was here;
+            // ~40% is the closest read. Re-check against the node.
+            "border-brand-red/30 opacity-40"
       }`}
     >
       {/* Figma's tracking is measured for 32px display type — applying it to

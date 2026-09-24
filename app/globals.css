@@ -178,6 +178,25 @@ body {
   background-image: linear-gradient(90deg, #000000 83%, #ff5050 94%);
 }
 
+/* About page, "Our Core Values" — Figma 425:4111, measured from the text
+   node's own characterStyleOverrides. The other two headings on this page
+   reuse existing keys: Mission/Vision matches red-black-16 / black-red-69 and
+   "Why Choose SV Tech" matches red-black-33 / black-red-83 exactly. */
+.text-gradient-values-start,
+.text-gradient-values-end {
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+/* "Our" */
+.text-gradient-values-start {
+  background-image: linear-gradient(90deg, #ff5050 0%, #000000 13.46%);
+}
+/* "Pakistan" */
+.text-gradient-values-end {
+  background-image: linear-gradient(90deg, #000000 65.87%, #ff5050 82.69%);
+}
+
 /* Marquee for partner logos */
 @keyframes marquee {
   from {
@@ -191,16 +210,24 @@ body {
   animation: marquee 40s linear infinite;
 }
 
-/* Ambient pulse for CTA red ellipse glow */
+/* Ambient pulse for CTA red ellipse glow.
+
+   NO translate here. This keyframe originally carried translate(-50%, -50%)
+   because its one consumer — sections/CTABanner — was centred with
+   `left-1/2 top-1/2`. When the glow was repositioned to Figma's measured
+   (-351, -15) the translate was left behind, so the animation kept shifting
+   the element a further -350.5px / -181px and pushed it almost entirely off
+   the left edge. A keyframe must not carry another element's positioning:
+   anything centred has to apply its own translate utilities. */
 @keyframes ambient-pulse {
   0%,
   100% {
     opacity: 0.7;
-    transform: translate(-50%, -50%) scale(1);
+    transform: scale(1);
   }
   50% {
     opacity: 1;
-    transform: translate(-50%, -50%) scale(1.1);
+    transform: scale(1.1);
   }
 }
 .animate-ambient-pulse {
